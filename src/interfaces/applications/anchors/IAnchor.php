@@ -2,7 +2,9 @@
 namespace deflou\interfaces\applications\anchors;
 
 use deflou\interfaces\applications\activities\IActivity;
+use deflou\interfaces\applications\activities\IHasEvent;
 use extas\interfaces\IHasCreatedAt;
+use extas\interfaces\IHasId;
 use extas\interfaces\IHasType;
 use extas\interfaces\IItem;
 
@@ -14,23 +16,12 @@ use extas\interfaces\IItem;
  * @package deflou\interfaces\applications\anchors
  * @author jeyroik@gmail.com
  */
-interface IAnchor extends IItem, IHasType, IHasCreatedAt
+interface IAnchor extends IItem, IHasType, IHasCreatedAt, IHasEvent, IHasId
 {
     public const SUBJECT = 'deflou.app.anchor';
 
-    public const FIELD__EVENT_NAME = 'event_name';
     public const FIELD__CALLS_NUMBER = 'calls_number';
     public const FIELD__LAST_CALL_TIME = 'last_call_time';
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string;
-
-    /**
-     * @return IActivity|null
-     */
-    public function getEvent(): ?IActivity;
 
     /**
      * @return int
@@ -41,12 +32,6 @@ interface IAnchor extends IItem, IHasType, IHasCreatedAt
      * @return int
      */
     public function getLastCallTime(): int;
-
-    /**
-     * @param string $eventName
-     * @return IAnchor
-     */
-    public function setEventName(string $eventName): IAnchor;
 
     /**
      * @param int $callsNumber

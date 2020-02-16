@@ -2,6 +2,7 @@
 namespace deflou\interfaces\triggers;
 
 use extas\interfaces\IHasCreatedAt;
+use extas\interfaces\IHasId;
 use extas\interfaces\IItem;
 use extas\interfaces\players\IHasOwner;
 
@@ -11,7 +12,7 @@ use extas\interfaces\players\IHasOwner;
  * @package deflou\interfaces\triggers
  * @author jeyroik@gmail.com
  */
-interface ITriggerStateHistory extends IItem, IHasCreatedAt, IHasOwner, IHasTrigger
+interface ITriggerStateHistory extends IItem, IHasCreatedAt, IHasOwner, IHasTrigger, IHasId
 {
     public const SUBJECT = 'deflou.trigger.state.history';
 

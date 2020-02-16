@@ -11,5 +11,6 @@ use extas\interfaces\samples\IHasSample;
  */
 interface IActivity extends IActivitySample, IHasSample
 {
-
+    public const TYPE__EVENT = 'event';
+    public const TYPE__ACTION = 'action';
 }

@@ -1,0 +1,103 @@
+{
+  "name": "deflou/core",
+  "package_classes": [
+    {
+      "interface": "deflou\\interfaces\\applications\\activities\\IActivityRepository",
+      "class": "deflou\\components\\applications\\activities\\ActivityRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\applications\\activities\\IActivitySampleRepository",
+      "class": "deflou\\components\\applications\\activities\\ActivitySampleRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\applications\\anchors\\IAnchorRepository",
+      "class": "deflou\\components\\applications\\anchors\\AnchorRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\applications\\IApplicationRepository",
+      "class": "deflou\\components\\applications\\ApplicationRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\applications\\IApplicationSampleRepository",
+      "class": "deflou\\components\\applications\\ApplicationSampleRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\fields\\types\\IFieldTypeRepository",
+      "class": "deflou\\components\\fields\\types\\FieldTypeRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\fields\\types\\IFieldTypeSampleRepository",
+      "class": "deflou\\components\\fields\\types\\FieldTypeSampleRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\fields\\IFieldRepository",
+      "class": "deflou\\components\\fields\\FieldRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\fields\\IFieldSampleRepository",
+      "class": "deflou\\components\\fields\\FieldSampleRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\triggers\\ITriggerRepository",
+      "class": "deflou\\components\\triggers\\TriggerRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\triggers\\ITriggerSampleRepository",
+      "class": "deflou\\components\\triggers\\TriggerSampleRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\triggers\\ITriggerStateHistoryRepository",
+      "class": "deflou\\components\\triggers\\TriggerStateHistoryRepository"
+    },
+  ],
+  "plugins": [
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallActivities",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallActivitySamples",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallAnchors",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallApplications",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallApplicationSamples",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallFields",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallFieldSamples",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallFieldTypes",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallFieldTypeSamples",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallTriggers",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallTriggerSamples",
+      "stage": "extas.install"
+    },
+    {
+      "class": "deflou\\components\\plugins\\PluginInstallTriggerStateHistories",
+      "stage": "extas.install"
+    }
+  ]
+}

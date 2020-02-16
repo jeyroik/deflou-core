@@ -9,12 +9,12 @@ namespace deflou\interfaces\triggers;
  */
 interface IHasTrigger
 {
-    public const FIELD__TRIGGER_ID = 'trigger_id';
+    public const FIELD__TRIGGER_NAME = 'trigger_name';
 
     /**
      * @return string
      */
-    public function getTriggerId(): string;
+    public function getTriggerName(): string;
 
     /**
      * @return ITrigger|null
@@ -22,8 +22,8 @@ interface IHasTrigger
     public function getTrigger(): ?ITrigger;
 
     /**
-     * @param string $triggerId
+     * @param string $triggerName
      * @return $this
      */
-    public function setTriggerId(string $triggerId);
+    public function setTriggerName(string $triggerName);
 }
