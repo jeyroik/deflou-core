@@ -3,10 +3,14 @@ namespace deflou\interfaces\applications\anchors;
 
 use deflou\interfaces\applications\activities\IActivity;
 use deflou\interfaces\applications\activities\IHasEvent;
+use deflou\interfaces\triggers\IHasTrigger;
 use extas\interfaces\IHasCreatedAt;
 use extas\interfaces\IHasId;
+use extas\interfaces\IHasName;
 use extas\interfaces\IHasType;
 use extas\interfaces\IItem;
+use extas\interfaces\players\IHasOwner;
+use extas\interfaces\players\IHasPlayer;
 
 /**
  * Interface IAnchor
@@ -16,12 +20,16 @@ use extas\interfaces\IItem;
  * @package deflou\interfaces\applications\anchors
  * @author jeyroik@gmail.com
  */
-interface IAnchor extends IItem, IHasType, IHasCreatedAt, IHasEvent, IHasId
+interface IAnchor extends IItem, IHasType, IHasCreatedAt, IHasEvent, IHasId, IHasPlayer, IHasTrigger
 {
     public const SUBJECT = 'deflou.app.anchor';
 
     public const FIELD__CALLS_NUMBER = 'calls_number';
     public const FIELD__LAST_CALL_TIME = 'last_call_time';
+
+    public const TYPE__GENERAL = 'general';
+    public const TYPE__PLAYER = 'player';
+    public const TYPE__TRIGGER = 'trigger';
 
     /**
      * @return int

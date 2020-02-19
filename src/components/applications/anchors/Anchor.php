@@ -2,8 +2,10 @@
 namespace deflou\components\applications\anchors;
 
 use deflou\components\applications\activities\THasEvent;
+use deflou\components\triggers\THasTrigger;
 use deflou\interfaces\applications\anchors\IAnchor;
 use extas\components\Item;
+use extas\components\players\THasPlayer;
 use extas\components\THasCreatedAt;
 use extas\components\THasId;
 use extas\components\THasType;
@@ -20,6 +22,8 @@ class Anchor extends Item implements IAnchor
     use THasType;
     use THasCreatedAt;
     use THasEvent;
+    use THasPlayer;
+    use THasTrigger;
 
     /**
      * @return int

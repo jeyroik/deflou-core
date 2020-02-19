@@ -48,7 +48,7 @@
     {
       "interface": "deflou\\interfaces\\triggers\\ITriggerStateHistoryRepository",
       "class": "deflou\\components\\triggers\\TriggerStateHistoryRepository"
-    },
+    }
   ],
   "plugins": [
     {

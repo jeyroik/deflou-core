@@ -3,6 +3,7 @@ namespace deflou\interfaces\triggers;
 
 use deflou\interfaces\applications\activities\IHasAction;
 use deflou\interfaces\applications\activities\IHasEvent;
+use extas\interfaces\conditions\IConditionParameter;
 use extas\interfaces\players\IHasOwner;
 use extas\interfaces\samples\ISample;
 use extas\interfaces\samples\parameters\ISampleParameter;
@@ -19,7 +20,7 @@ interface ITriggerSample extends ISample, IHasOwner, IHasEvent, IHasAction
     public const FIELD__ACTION_PARAMETERS = 'action_parameters';
 
     /**
-     * @return ISampleParameter[]
+     * @return IConditionParameter[]
      */
     public function getEventParameters(): array;
 
@@ -39,7 +40,7 @@ interface ITriggerSample extends ISample, IHasOwner, IHasEvent, IHasAction
     public function getActionParametersOptions(): array;
 
     /**
-     * @param ISampleParameter[] $parameters
+     * @param IConditionParameter[] $parameters
      * @return $this
      */
     public function setEventParameters(array $parameters);
