@@ -50,6 +50,51 @@
       "class": "deflou\\components\\triggers\\TriggerStateHistoryRepository"
     }
   ],
+  "application_samples": [
+    {
+      "name": "deflou",
+      "title": "DeFlou",
+      "description": "DeFlou instance",
+      "parameters": {
+        "host": {
+          "name": "host",
+          "title": "Host",
+          "description": "Host"
+        },
+        "port": {
+          "name": "port",
+          "title": "Port",
+          "description": "Port"
+        }
+      },
+      "created_at": 0,
+      "updated_at": 0
+    }
+  ],
+  "application_activity_samples": [
+    {
+      "name": "event/nothing",
+      "title": "Nothing",
+      "description": "Nothing happened",
+      "owner": "admin",
+      "type": "event",
+      "class": "deflou\\components\\applications\\activities\\events\\EventNothing",
+      "parameters": {},
+      "created_at": 0,
+      "updated_at": 0
+    },
+    {
+      "name": "action/nothing",
+      "title": "Nothing",
+      "description": "Nothing to do",
+      "owner": "admin",
+      "type": "action",
+      "class": "deflou\\components\\applications\\activities\\actions\\ActionNothing",
+      "parameters": {},
+      "created_at": 0,
+      "updated_at": 0
+    }
+  ],
   "plugins": [
     {
       "class": "deflou\\components\\plugins\\PluginInstallActivities",
