@@ -1,5 +1,5 @@
 <?php
-namespace deflou\components\fields;
+namespace deflou\components\fields\types;
 
 use deflou\components\fields\types\FieldTypeSample;
 use deflou\interfaces\fields\types\IFieldType;
