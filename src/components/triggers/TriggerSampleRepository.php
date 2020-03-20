@@ -12,9 +12,9 @@ use extas\components\repositories\Repository;
  */
 class TriggerSampleRepository extends Repository implements ITriggerSampleRepository
 {
-    protected $scope = 'deflou';
-    protected $name = 'triggers_samples';
-    protected $pk = TriggerSample::FIELD__NAME;
-    protected $idAs = '';
-    protected $itemClass = TriggerSample::class;
+    protected string $scope = 'deflou';
+    protected string $name = 'triggers_samples';
+    protected string $pk = TriggerSample::FIELD__NAME;
+    protected string $idAs = '';
+    protected string $itemClass = TriggerSample::class;
 }

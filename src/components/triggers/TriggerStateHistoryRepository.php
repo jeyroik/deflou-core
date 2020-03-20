@@ -12,9 +12,9 @@ use extas\components\repositories\Repository;
  */
 class TriggerStateHistoryRepository extends Repository implements ITriggerStateHistoryRepository
 {
-    protected $itemClass = TriggerStateHistory::class;
-    protected $idAs = '';
-    protected $pk = TriggerStateHistory::FIELD__ID;
-    protected $name = 'triggers_state_histories';
-    protected $scope = 'deflou';
+    protected string $itemClass = TriggerStateHistory::class;
+    protected string $idAs = '';
+    protected string $pk = TriggerStateHistory::FIELD__ID;
+    protected string $name = 'triggers_state_histories';
+    protected string $scope = 'deflou';
 }

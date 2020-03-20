@@ -1,15 +1,12 @@
 <?php
 namespace deflou\interfaces\applications\anchors;
 
-use deflou\interfaces\applications\activities\IActivity;
 use deflou\interfaces\applications\activities\IHasEvent;
 use deflou\interfaces\triggers\IHasTrigger;
 use extas\interfaces\IHasCreatedAt;
 use extas\interfaces\IHasId;
-use extas\interfaces\IHasName;
 use extas\interfaces\IHasType;
 use extas\interfaces\IItem;
-use extas\interfaces\players\IHasOwner;
 use extas\interfaces\players\IHasPlayer;
 
 /**

@@ -2,11 +2,11 @@
   "name": "jeyroik/deflou-core",
   "description": "Core package for DeFlou",
   "require": {
-    "jeyroik/extas-base": "*",
-    "jeyroik/extas-installer": "*",
-    "jeyroik/extas-players": "*",
-    "jeyroik/extas-samples": "*",
-    "jeyroik/extas-conditions": "*"
+    "jeyroik/extas-base": "1.*",
+    "jeyroik/extas-installer": "2.*",
+    "jeyroik/extas-players": "1.*",
+    "jeyroik/extas-samples": "0.*",
+    "jeyroik/extas-conditions": "1.*"
   },
   "autoload": {
     "psr-4": {

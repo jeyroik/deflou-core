@@ -1,8 +1,10 @@
 <?php
 namespace deflou\components\applications\activities\actions;
 
+use deflou\components\triggers\TriggerResponse;
 use deflou\interfaces\applications\activities\IActivity;
 use deflou\interfaces\triggers\ITrigger;
+use deflou\interfaces\triggers\ITriggerResponse;
 
 /**
  * Class ActionNothing
@@ -15,13 +17,13 @@ class ActionNothing extends Action
     /**
      * @param ITrigger $trigger
      * @param IActivity $event
-     * @param array $responseData
+     * @return ITriggerResponse
      */
-    public function __invoke(ITrigger $trigger, IActivity $event, array &$responseData)
+    public function __invoke(ITrigger $trigger, IActivity $event): ITriggerResponse
     {
-        $responseData[$trigger->getName()] = [
-            'status' => 200,
-            'body' => 'Nothing done'
-        ];
+        return new TriggerResponse([
+            ITriggerResponse::FIELD__STATUS => ITriggerResponse::STATUS__OK,
+            ITriggerResponse::FIELD__BODY => 'Nothing done'
+        ]);
     }
 }

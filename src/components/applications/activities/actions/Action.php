@@ -3,6 +3,7 @@ namespace deflou\components\applications\activities\actions;
 
 use deflou\interfaces\applications\activities\IActivity;
 use deflou\interfaces\triggers\ITrigger;
+use deflou\interfaces\triggers\ITriggerResponse;
 use extas\components\Item;
 
 /**
@@ -16,10 +17,9 @@ abstract class Action extends Item
     /**
      * @param ITrigger $trigger
      * @param IActivity $event
-     * @param array $responseData
-     * @return void
+     * @return ITriggerResponse
      */
-    abstract public function __invoke(ITrigger $trigger, IActivity $event, array &$responseData);
+    abstract public function __invoke(ITrigger $trigger, IActivity $event): ITriggerResponse;
 
     /**
      * @return string
