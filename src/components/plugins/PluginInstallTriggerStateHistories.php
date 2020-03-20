@@ -13,9 +13,9 @@ use extas\components\plugins\PluginInstallDefault;
  */
 class PluginInstallTriggerStateHistories extends PluginInstallDefault
 {
-    protected $selfRepositoryClass = ITriggerStateHistoryRepository::class;
-    protected $selfItemClass = TriggerStateHistory::class;
-    protected $selfUID = TriggerStateHistory::FIELD__ID;
-    protected $selfSection = 'trigger_state_histories';
-    protected $selfName = 'trigger state history';
+    protected string $selfRepositoryClass = ITriggerStateHistoryRepository::class;
+    protected string $selfItemClass = TriggerStateHistory::class;
+    protected string $selfUID = TriggerStateHistory::FIELD__ID;
+    protected string $selfSection = 'trigger_state_histories';
+    protected string $selfName = 'trigger state history';
 }

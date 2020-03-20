@@ -13,9 +13,9 @@ use extas\components\plugins\PluginInstallDefault;
  */
 class PluginInstallAnchors extends PluginInstallDefault
 {
-    protected $selfRepositoryClass = IAnchorRepository::class;
-    protected $selfItemClass = Anchor::class;
-    protected $selfUID = Anchor::FIELD__ID;
-    protected $selfSection = 'application_anchors';
-    protected $selfName = 'application anchor';
+    protected string $selfRepositoryClass = IAnchorRepository::class;
+    protected string $selfItemClass = Anchor::class;
+    protected string $selfUID = Anchor::FIELD__ID;
+    protected string $selfSection = 'application_anchors';
+    protected string $selfName = 'application anchor';
 }

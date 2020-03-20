@@ -1,6 +1,7 @@
 <?php
 namespace deflou\components\fields\types;
 
+use deflou\components\fields\FieldType;
 use deflou\interfaces\fields\types\IFieldTypeRepository;
 use extas\components\repositories\Repository;
 
@@ -12,5 +13,9 @@ use extas\components\repositories\Repository;
  */
 class FieldTypeRepository extends Repository implements IFieldTypeRepository
 {
-
+    protected string $itemClass = FieldType::class;
+    protected string $idAs = '';
+    protected string $pk = FieldType::FIELD__NAME;
+    protected string $name = 'fields_types';
+    protected string $scope = 'deflou';
 }

@@ -13,9 +13,9 @@ use extas\components\plugins\PluginInstallDefault;
  */
 class PluginInstallActivities extends PluginInstallDefault
 {
-    protected $selfRepositoryClass = IActivityRepository::class;
-    protected $selfItemClass = Activity::class;
-    protected $selfUID = Activity::FIELD__NAME;
-    protected $selfSection = 'application_activities';
-    protected $selfName = 'application activity';
+    protected string $selfRepositoryClass = IActivityRepository::class;
+    protected string $selfItemClass = Activity::class;
+    protected string $selfUID = Activity::FIELD__NAME;
+    protected string $selfSection = 'application_activities';
+    protected string $selfName = 'application activity';
 }

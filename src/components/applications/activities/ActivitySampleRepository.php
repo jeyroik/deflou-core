@@ -12,9 +12,9 @@ use extas\components\repositories\Repository;
  */
 class ActivitySampleRepository extends Repository implements IActivitySampleRepository
 {
-    protected $itemClass = ActivitySample::FIELD__NAME;
-    protected $idAs = '';
-    protected $pk = ActivitySample::FIELD__NAME;
-    protected $name = 'activities_samples';
-    protected $scope = 'deflou';
+    protected string $itemClass = ActivitySample::FIELD__NAME;
+    protected string $idAs = '';
+    protected string $pk = ActivitySample::FIELD__NAME;
+    protected string $name = 'activities_samples';
+    protected string $scope = 'deflou';
 }

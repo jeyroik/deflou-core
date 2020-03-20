@@ -13,9 +13,9 @@ use extas\components\plugins\PluginInstallDefault;
  */
 class PluginInstallFieldTypes extends PluginInstallDefault
 {
-    protected $selfRepositoryClass = IFieldTypeRepository::class;
-    protected $selfItemClass = FieldType::class;
-    protected $selfUID = FieldType::FIELD__NAME;
-    protected $selfSection = 'field_types';
-    protected $selfName = 'field type';
+    protected string $selfRepositoryClass = IFieldTypeRepository::class;
+    protected string $selfItemClass = FieldType::class;
+    protected string $selfUID = FieldType::FIELD__NAME;
+    protected string $selfSection = 'field_types';
+    protected string $selfName = 'field type';
 }

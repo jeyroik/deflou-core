@@ -13,9 +13,9 @@ use extas\components\plugins\PluginInstallDefault;
  */
 class PluginInstallTriggerSamples extends PluginInstallDefault
 {
-    protected $selfName = 'trigger sample';
-    protected $selfSection = 'trigger_samples';
-    protected $selfUID = TriggerSample::FIELD__NAME;
-    protected $selfItemClass = TriggerSample::class;
-    protected $selfRepositoryClass = ITriggerSampleRepository::class;
+    protected string $selfName = 'trigger sample';
+    protected string $selfSection = 'trigger_samples';
+    protected string $selfUID = TriggerSample::FIELD__NAME;
+    protected string $selfItemClass = TriggerSample::class;
+    protected string $selfRepositoryClass = ITriggerSampleRepository::class;
 }

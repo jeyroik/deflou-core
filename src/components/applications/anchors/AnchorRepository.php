@@ -12,9 +12,9 @@ use extas\components\repositories\Repository;
  */
 class AnchorRepository extends Repository implements IAnchorRepository
 {
-    protected $scope = 'deflou';
-    protected $name = 'applications_anchors';
-    protected $pk = Anchor::FIELD__ID;
-    protected $idAs = Anchor::FIELD__ID;
-    protected $itemClass = Anchor::class;
+    protected string $scope = 'deflou';
+    protected string $name = 'applications_anchors';
+    protected string $pk = Anchor::FIELD__ID;
+    protected string $idAs = Anchor::FIELD__ID;
+    protected string $itemClass = Anchor::class;
 }

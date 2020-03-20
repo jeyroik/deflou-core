@@ -13,9 +13,9 @@ use extas\components\plugins\PluginInstallDefault;
  */
 class PluginInstallApplications extends PluginInstallDefault
 {
-    protected $selfName = 'application';
-    protected $selfSection = 'applications';
-    protected $selfUID = Application::FIELD__NAME;
-    protected $selfItemClass = Application::class;
-    protected $selfRepositoryClass = IApplicationRepository::class;
+    protected string $selfName = 'application';
+    protected string $selfSection = 'applications';
+    protected string $selfUID = Application::FIELD__NAME;
+    protected string $selfItemClass = Application::class;
+    protected string $selfRepositoryClass = IApplicationRepository::class;
 }

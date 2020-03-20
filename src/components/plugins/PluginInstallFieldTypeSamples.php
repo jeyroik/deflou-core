@@ -13,9 +13,9 @@ use extas\components\plugins\PluginInstallDefault;
  */
 class PluginInstallFieldTypeSamples extends PluginInstallDefault
 {
-    protected $selfRepositoryClass = IFieldTypeSampleRepository::class;
-    protected $selfItemClass = FieldTypeSample::class;
-    protected $selfUID = FieldTypeSample::FIELD__NAME;
-    protected $selfSection = 'field_type_samples';
-    protected $selfName = 'field type sample';
+    protected string $selfRepositoryClass = IFieldTypeSampleRepository::class;
+    protected string $selfItemClass = FieldTypeSample::class;
+    protected string $selfUID = FieldTypeSample::FIELD__NAME;
+    protected string $selfSection = 'field_type_samples';
+    protected string $selfName = 'field type sample';
 }

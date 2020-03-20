@@ -13,9 +13,9 @@ use extas\components\plugins\PluginInstallDefault;
  */
 class PluginInstallTriggers extends PluginInstallDefault
 {
-    protected $selfName = 'trigger';
-    protected $selfSection = 'triggers';
-    protected $selfUID = Trigger::FIELD__NAME;
-    protected $selfItemClass = Trigger::class;
-    protected $selfRepositoryClass = ITriggerRepository::class;
+    protected string $selfName = 'trigger';
+    protected string $selfSection = 'triggers';
+    protected string $selfUID = Trigger::FIELD__NAME;
+    protected string $selfItemClass = Trigger::class;
+    protected string $selfRepositoryClass = ITriggerRepository::class;
 }

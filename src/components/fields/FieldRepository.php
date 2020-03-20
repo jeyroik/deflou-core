@@ -12,9 +12,9 @@ use extas\components\repositories\Repository;
  */
 class FieldRepository extends Repository implements IFieldRepository
 {
-    protected $scope = 'deflou';
-    protected $name = 'fields';
-    protected $pk = Field::FIELD__NAME;
-    protected $idAs = '';
-    protected $itemClass = Field::class;
+    protected string $scope = 'deflou';
+    protected string $name = 'fields';
+    protected string $pk = Field::FIELD__NAME;
+    protected string $idAs = '';
+    protected string $itemClass = Field::class;
 }
