@@ -4,7 +4,7 @@
   "require": {
     "jeyroik/extas-installer": "2.*",
     "jeyroik/extas-players": "1.*",
-    "jeyroik/extas-samples": "0.*",
+    "jeyroik/extas-samples": "1.*",
     "jeyroik/extas-conditions": "0.*",
     "jeyroik/extas-repositories-mongo": "0.*"
   },
