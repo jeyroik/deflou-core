@@ -1,7 +1,7 @@
 <?php
 namespace deflou\components\plugins;
 
-use deflou\components\fields\FieldType;
+use deflou\components\fields\types\FieldType;
 use deflou\interfaces\fields\types\IFieldTypeRepository;
 use extas\components\plugins\PluginInstallDefault;
 
