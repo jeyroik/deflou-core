@@ -15,6 +15,5 @@ class TriggerExecutionHistoryRepository extends Repository implements ITriggerEx
     protected string $scope = 'deflou';
     protected string $name = 'triggers_execution_histories';
     protected string $pk = TriggerExecutionHistory::FIELD__ID;
-    protected string $idAs = TriggerExecutionHistory::FIELD__ID;
     protected string $itemClass = TriggerExecutionHistory::class;
 }

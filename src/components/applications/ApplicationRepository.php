@@ -15,6 +15,5 @@ class ApplicationRepository extends Repository implements IApplicationRepository
     protected string $scope = 'deflou';
     protected string $name = 'applications';
     protected string $pk = Application::FIELD__NAME;
-    protected string $idAs = '';
     protected string $itemClass = Application::class;
 }

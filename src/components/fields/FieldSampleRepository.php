@@ -13,7 +13,6 @@ use extas\components\repositories\Repository;
 class FieldSampleRepository extends Repository implements IFieldSampleRepository
 {
     protected string $itemClass = FieldSample::class;
-    protected string $idAs = '';
     protected string $pk = FieldSample::FIELD__NAME;
     protected string $name = 'fields_samples';
     protected string $scope = 'deflou';

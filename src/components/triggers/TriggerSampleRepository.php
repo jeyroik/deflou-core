@@ -15,6 +15,5 @@ class TriggerSampleRepository extends Repository implements ITriggerSampleReposi
     protected string $scope = 'deflou';
     protected string $name = 'triggers_samples';
     protected string $pk = TriggerSample::FIELD__NAME;
-    protected string $idAs = '';
     protected string $itemClass = TriggerSample::class;
 }
