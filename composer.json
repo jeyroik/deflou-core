@@ -6,7 +6,7 @@
     "jeyroik/extas-players": "1.*",
     "jeyroik/extas-samples": "1.*",
     "jeyroik/extas-conditions": "0.*",
-    "jeyroik/extas-repositories-mongo": "0.*",
+    "jeyroik/extas-repositories-mongo": "1.*",
     "jeyroik/extas-repositories-uuid-field": "0.*"
   },
   "autoload": {
