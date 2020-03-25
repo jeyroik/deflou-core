@@ -143,6 +143,18 @@
     {
       "class": "deflou\\components\\plugins\\PluginInstallTriggerStateHistories",
       "stage": "extas.install"
+    },
+    {
+      "class": "extas\\components\\plugins\\repositories\\PluginUuidField",
+      "stage": "extas.triggers_execution_histories.create.before"
+    },
+    {
+      "class": "extas\\components\\plugins\\repositories\\PluginUuidField",
+      "stage": "extas.triggers_state_histories.create.before"
+    },
+    {
+      "class": "extas\\components\\plugins\\repositories\\PluginUuidField",
+      "stage": "extas.applications_anchors.create.before"
     }
   ]
 }
