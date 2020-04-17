@@ -1,5 +1,4 @@
 <?php
-namespace tests;
 
 use deflou\components\applications\activities\Activity;
 use deflou\components\applications\activities\ActivityRepository;
@@ -45,7 +44,7 @@ use extas\components\plugins\PluginRepository;
  * @package tests
  * @author jeyroik@gmail.com
  */
-class TriggerTest extends TestCase
+class CoreTest extends TestCase
 {
     protected ?IRepository $playerRepo = null;
     protected ?IRepository $appRepo = null;
@@ -261,11 +260,18 @@ class TriggerTest extends TestCase
 
         $this->activityRepo->create(new Activity([
             Activity::FIELD__NAME => 'test',
-            Activity::FIELD__TYPE => Activity::TYPE__ACTION
+            Activity::FIELD__TYPE => Activity::TYPE__ACTION,
+            Activity::FIELD__APPLICATION_NAME => 'test'
         ]));
 
         $this->assertNotEmpty($response->getAction());
         $this->assertEquals('test', $response->getAction()->getName());
+        $this->assertEquals('test', $response->getAction()->getApplicationName());
+        $this->assertEquals('test', $response->getAction()->getApplication()->getName());
+
+        $action = $response->getAction();
+        $action->setApplicationName('test2');
+        $this->assertEquals('test2', $action->getApplicationName());
 
         $response->setActionSampleName('test');
         $this->assertEquals('test', $response->getActionSampleName());
@@ -300,7 +306,8 @@ class TriggerTest extends TestCase
 
         $this->activityRepo->create(new Activity([
             Activity::FIELD__NAME => 'test',
-            Activity::FIELD__TYPE => Activity::TYPE__EVENT
+            Activity::FIELD__TYPE => Activity::TYPE__EVENT,
+            Activity::FIELD__APPLICATION_NAME => 'test'
         ]));
 
         $this->assertNotEmpty($response->getEvent());
@@ -323,6 +330,14 @@ class TriggerTest extends TestCase
         $response->setTriggerName('test');
         $this->assertEquals('test', $response->getTriggerName());
 
+        $this->triggerRepo->create(new Trigger([
+            Trigger::FIELD__NAME => 'test'
+        ]));
+
+        $this->assertNotEmpty($response->getTrigger());
+        $this->assertEquals('test', $response->getTrigger()->getName());
+
+
         // response
 
         $response->setResponseBody('test');
@@ -343,5 +358,18 @@ class TriggerTest extends TestCase
 
         $this->assertNotEmpty($response->getPlayer());
         $this->assertEquals('test', $response->getPlayer()->getName());
+    }
+
+    public function testAnchor()
+    {
+        $anchor = new Anchor();
+        $anchor->setCallsNumber(1);
+        $this->assertEquals(1, $anchor->getCallsNumber());
+        $anchor->incCallsNumber();
+        $this->assertEquals(2, $anchor->getCallsNumber());
+
+        $now = time();
+        $anchor->setLastCallTime($now);
+        $this->assertEquals($now, $anchor->getLastCallTime());
     }
 }

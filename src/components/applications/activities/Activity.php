@@ -1,6 +1,7 @@
 <?php
 namespace deflou\components\applications\activities;
 
+use deflou\components\applications\THasApplication;
 use deflou\interfaces\applications\activities\IActivity;
 use extas\components\samples\THasSample;
 
@@ -13,6 +14,7 @@ use extas\components\samples\THasSample;
 class Activity extends ActivitySample implements IActivity
 {
     use THasSample;
+    use THasApplication;
 
     /**
      * @return string

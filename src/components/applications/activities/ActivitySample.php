@@ -23,35 +23,4 @@ class ActivitySample extends Sample implements IActivitySample
     use THasPlayer;
     use THasType;
     use THasClass;
-
-    /**
-     * @return string
-     */
-    public function getApplicationName(): string
-    {
-        return $this->config[static::FIELD__APPLICATION_NAME] ?? '';
-    }
-
-    /**
-     * @return IApplication|null
-     */
-    public function getApplication(): ?IApplication
-    {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IApplicationRepository::class);
-        return $repo->one([IApplication::FIELD__NAME => $this->getApplicationName()]);
-    }
-
-    /**
-     * @param string $appName
-     * @return $this
-     */
-    public function setApplicationName(string $appName)
-    {
-        $this->config[static::FIELD__APPLICATION_NAME] = $appName;
-
-        return $this;
-    }
 }
