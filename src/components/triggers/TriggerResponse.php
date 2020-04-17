@@ -257,6 +257,14 @@ class TriggerResponse extends Item implements ITriggerResponse
     }
 
     /**
+     * @return bool
+     */
+    public function isSuccess(): bool
+    {
+        return $this->config[static::FIELD__IS_SUCCESS] ?? false;
+    }
+
+    /**
      * @return string
      */
     protected function getSubjectForExtension(): string

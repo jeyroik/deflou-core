@@ -2,26 +2,37 @@
 namespace tests;
 
 use deflou\components\applications\activities\Activity;
+use deflou\components\applications\activities\ActivityRepository;
+use deflou\components\applications\activities\ActivitySample;
+use deflou\components\applications\activities\ActivitySampleRepository;
 use deflou\components\applications\anchors\Anchor;
 use deflou\components\applications\Application;
 use deflou\components\applications\ApplicationRepository;
+use deflou\components\applications\ApplicationSample;
+use deflou\components\applications\ApplicationSampleRepository;
 use deflou\components\triggers\TriggerAction;
 use deflou\components\triggers\TriggerResponse;
 use deflou\components\triggers\TriggerResponseRepository;
 use deflou\components\triggers\TriggerSample;
 use deflou\components\triggers\TriggerStateHistory;
 use deflou\interfaces\applications\activities\IActivity;
+use deflou\interfaces\applications\activities\IActivityRepository;
+use deflou\interfaces\applications\activities\IActivitySampleRepository;
 use deflou\interfaces\applications\anchors\IAnchor;
 use deflou\interfaces\applications\IApplicationRepository;
+use deflou\interfaces\applications\IApplicationSampleRepository;
 use deflou\interfaces\triggers\ITrigger;
 use deflou\interfaces\triggers\ITriggerResponse;
 use deflou\interfaces\triggers\ITriggerResponseRepository;
 use Dotenv\Dotenv;
+use extas\components\players\Player;
+use extas\components\players\PlayerRepository;
 use extas\components\plugins\Plugin;
 use extas\components\plugins\repositories\PluginFieldSampleName;
 use extas\components\plugins\repositories\PluginFieldUuid;
 use extas\components\samples\parameters\SampleParameter;
 use extas\components\SystemContainer;
+use extas\interfaces\players\IPlayerRepository;
 use extas\interfaces\samples\parameters\ISampleParameter;
 use PHPUnit\Framework\TestCase;
 use deflou\components\triggers\Trigger;
@@ -36,7 +47,11 @@ use extas\components\plugins\PluginRepository;
  */
 class TriggerTest extends TestCase
 {
+    protected ?IRepository $playerRepo = null;
     protected ?IRepository $appRepo = null;
+    protected ?IRepository $appSampleRepo = null;
+    protected ?IRepository $activityRepo = null;
+    protected ?IRepository $activitySampleRepo = null;
     protected ?IRepository $pluginRepo = null;
     protected ?IRepository $triggersResponsesRepo = null;
 
@@ -47,12 +62,32 @@ class TriggerTest extends TestCase
         $env->load();
 
         $this->appRepo = new ApplicationRepository();
+        $this->appSampleRepo = new ApplicationSampleRepository();
+        $this->activityRepo = new ActivityRepository();
+        $this->activitySampleRepo = new ActivitySampleRepository();
+        $this->playerRepo = new PlayerRepository();
         $this->triggersResponsesRepo = new TriggerResponseRepository();
         $this->pluginRepo = new PluginRepository();
 
         SystemContainer::addItem(
             IApplicationRepository::class,
             ApplicationRepository::class
+        );
+        SystemContainer::addItem(
+            IApplicationSampleRepository::class,
+            ApplicationSampleRepository::class
+        );
+        SystemContainer::addItem(
+            IActivityRepository::class,
+            ActivityRepository::class
+        );
+        SystemContainer::addItem(
+            IActivitySampleRepository::class,
+            ActivitySampleRepository::class
+        );
+        SystemContainer::addItem(
+            IPlayerRepository::class,
+            PlayerRepository::class
         );
         SystemContainer::addItem(
             ITriggerResponseRepository::class,
@@ -63,7 +98,13 @@ class TriggerTest extends TestCase
     public function tearDown(): void
     {
         $this->appRepo->delete([Application::FIELD__SAMPLE_NAME => 'test_app']);
+        $this->appRepo->delete([Application::FIELD__NAME => 'test']);
+        $this->appSampleRepo->delete([ApplicationSample::FIELD__NAME => 'test']);
+        $this->activityRepo->delete([Activity::FIELD__NAME => 'test']);
+        $this->activitySampleRepo->delete([ActivitySample::FIELD__NAME => 'test']);
+        $this->playerRepo->delete([Player::FIELD__NAME => 'test']);
         $this->triggersResponsesRepo->delete([TriggerResponse::FIELD__PLAYER_NAME => 'test_player']);
+        $this->pluginRepo->delete([Plugin::FIELD__STAGE => 'extas.triggers_responses.create.before']);
     }
 
     public function testSetAndGetExecutionTime()
@@ -193,5 +234,108 @@ class TriggerTest extends TestCase
          */
         $responseFromDb = $this->triggersResponsesRepo->one([TriggerResponse::FIELD__ID => $response->getId()]);
         $this->assertEquals('test_player', $responseFromDb->getPlayerName());
+    }
+
+    /**
+     * @throws
+     */
+    public function testTriggerResponse()
+    {
+        $response = new TriggerResponse();
+
+        // action
+
+        $response->setActionApplicationName('test');
+        $this->assertEquals('test', $response->getActionApplicationName());
+
+        $this->appRepo->create(new Application([
+            Application::FIELD__NAME => 'test',
+            Application::FIELD__SAMPLE_NAME => 'test'
+        ]));
+
+        $this->assertNotEmpty($response->getActionApplication());
+        $this->assertEquals('test', $response->getActionApplication()->getName());
+
+        $response->setActionName('test');
+        $this->assertEquals('test', $response->getActionName());
+
+        $this->activityRepo->create(new Activity([
+            Activity::FIELD__NAME => 'test'
+        ]));
+
+        $this->assertNotEmpty($response->getAction());
+        $this->assertEquals('test', $response->getAction()->getName());
+
+        $response->setActionSampleName('test');
+        $this->assertEquals('test', $response->getActionSampleName());
+
+        $this->activitySampleRepo->create(new ActivitySample([
+            ActivitySample::FIELD__NAME => 'test'
+        ]));
+
+        $this->assertNotEmpty($response->getActionSample());
+        $this->assertEquals('test', $response->getActionSample()->getName());
+
+        $response->setActionApplicationSampleName('test');
+        $this->assertEquals('test', $response->getActionApplicationSampleName());
+
+        $this->appSampleRepo->create(new ApplicationSample([
+            ApplicationSample::FIELD__NAME => 'test'
+        ]));
+
+        $this->assertNotEmpty($response->getActionApplicationSample());
+        $this->assertEquals('test', $response->getActionApplicationSample()->getName());
+
+        // event
+
+        $response->setEventApplicationName('test');
+        $this->assertEquals('test', $response->getEventApplicationName());
+
+        $this->assertNotEmpty($response->getEventApplication());
+        $this->assertEquals('test', $response->getEventApplication()->getName());
+
+        $response->setEventName('test');
+        $this->assertEquals('test', $response->getEventName());
+
+        $this->assertNotEmpty($response->getEvent());
+        $this->assertEquals('test', $response->getEvent()->getName());
+
+        $response->setEventSampleName('test');
+        $this->assertEquals('test', $response->getEventSampleName());
+
+        $this->assertNotEmpty($response->getEventSample());
+        $this->assertEquals('test', $response->getEventSample()->getName());
+
+        $response->setEventApplicationSampleName('test');
+        $this->assertEquals('test', $response->getEventApplicationSampleName());
+
+        $this->assertNotEmpty($response->geEventApplicationSample());
+        $this->assertEquals('test', $response->getEventApplicationSample()->getName());
+
+        // trigger
+
+        $response->setTriggerName('test');
+        $this->assertEquals('test', $response->getTriggerName());
+
+        // response
+
+        $response->setResponseBody('test');
+        $this->assertEquals('test', $response->getResponseBody());
+
+        $response->setResponseStatus(200);
+        $this->assertEquals(200, $response->getResponseStatus());
+        $this->assertTrue($response->isSuccess());
+
+        // player
+
+        $response->setPlayerName('test');
+        $this->assertEquals('test', $response->getPlayerName());
+
+        $this->playerRepo->create(new Player([
+            Player::FIELD__NAME => 'test'
+        ]));
+
+        $this->assertNotEmpty($response->getPlayer());
+        $this->assertEquals('test', $response->getPlayer()->getName());
     }
 }

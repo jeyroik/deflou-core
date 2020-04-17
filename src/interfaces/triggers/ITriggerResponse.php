@@ -159,4 +159,9 @@ interface ITriggerResponse extends IItem, IHasCreatedAt, IHasId, IHasTrigger, IH
      * @return $this
      */
     public function setResponseBody(string $responseBody): ITriggerResponse;
+
+    /**
+     * @return bool
+     */
+    public function isSuccess(): bool;
 }
