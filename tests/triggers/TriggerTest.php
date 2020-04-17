@@ -260,7 +260,8 @@ class TriggerTest extends TestCase
         $this->assertEquals('test', $response->getActionName());
 
         $this->activityRepo->create(new Activity([
-            Activity::FIELD__NAME => 'test'
+            Activity::FIELD__NAME => 'test',
+            Activity::FIELD__TYPE => Activity::TYPE__ACTION
         ]));
 
         $this->assertNotEmpty($response->getAction());
@@ -296,6 +297,11 @@ class TriggerTest extends TestCase
 
         $response->setEventName('test');
         $this->assertEquals('test', $response->getEventName());
+
+        $this->activityRepo->create(new Activity([
+            Activity::FIELD__NAME => 'test',
+            Activity::FIELD__TYPE => Activity::TYPE__EVENT
+        ]));
 
         $this->assertNotEmpty($response->getEvent());
         $this->assertEquals('test', $response->getEvent()->getName());
