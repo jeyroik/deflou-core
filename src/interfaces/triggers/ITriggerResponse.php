@@ -137,23 +137,6 @@ interface ITriggerResponse extends IItem, IHasCreatedAt, IHasId, IHasTrigger, IH
     public function getActionSample(): ?IActivitySample;
 
     /**
-     * @return string
-     */
-    public function getPlayerName(): string;
-
-    /**
-     * @param string $playerName
-     *
-     * @return $this
-     */
-    public function setPlayerName(string $playerName): ITriggerResponse;
-
-    /**
-     * @return null|IPlayer
-     */
-    public function getPlayer(): ?IPlayer;
-
-    /**
      * @return int
      */
     public function getResponseStatus(): int;
