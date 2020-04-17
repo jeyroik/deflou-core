@@ -315,7 +315,7 @@ class TriggerTest extends TestCase
         $response->setEventApplicationSampleName('test');
         $this->assertEquals('test', $response->getEventApplicationSampleName());
 
-        $this->assertNotEmpty($response->geEventApplicationSample());
+        $this->assertNotEmpty($response->getEventApplicationSample());
         $this->assertEquals('test', $response->getEventApplicationSample()->getName());
 
         // trigger
