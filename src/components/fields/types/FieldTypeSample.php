@@ -2,7 +2,7 @@
 namespace deflou\components\fields\types;
 
 use deflou\interfaces\fields\types\IFieldTypeSample;
-use extas\components\players\THasOwner;
+use extas\components\players\THasPlayer;
 use extas\components\samples\Sample;
 use extas\components\THasClass;
 
@@ -14,6 +14,6 @@ use extas\components\THasClass;
  */
 class FieldTypeSample extends Sample implements IFieldTypeSample
 {
-    use THasOwner;
+    use THasPlayer;
     use THasClass;
 }

@@ -3,7 +3,7 @@ namespace deflou\interfaces\fields;
 
 use deflou\interfaces\fields\types\IFieldType;
 use extas\interfaces\IHasType;
-use extas\interfaces\players\IHasOwner;
+use extas\interfaces\players\IHasPlayer;
 use extas\interfaces\samples\ISample;
 
 /**
@@ -12,7 +12,7 @@ use extas\interfaces\samples\ISample;
  * @package deflou\interfaces\fields
  * @author jeyroik@gmail.com
  */
-interface IFieldSample extends ISample, IHasOwner, IHasType
+interface IFieldSample extends ISample, IHasPlayer, IHasType
 {
     /**
      * @return IFieldType|null

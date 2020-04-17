@@ -3,7 +3,7 @@ namespace deflou\components\triggers;
 
 use deflou\interfaces\triggers\ITriggerStateHistory;
 use extas\components\Item;
-use extas\components\players\THasOwner;
+use extas\components\players\THasPlayer;
 use extas\components\THasCreatedAt;
 use extas\components\THasId;
 
@@ -16,7 +16,7 @@ use extas\components\THasId;
 class TriggerStateHistory extends Item implements ITriggerStateHistory
 {
     use THasId;
-    use THasOwner;
+    use THasPlayer;
     use THasTrigger;
     use THasCreatedAt;
 

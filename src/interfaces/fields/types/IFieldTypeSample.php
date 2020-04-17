@@ -2,7 +2,7 @@
 namespace deflou\interfaces\fields\types;
 
 use extas\interfaces\IHasClass;
-use extas\interfaces\players\IHasOwner;
+use extas\interfaces\players\IHasPlayer;
 use extas\interfaces\samples\ISample;
 
 /**
@@ -11,7 +11,7 @@ use extas\interfaces\samples\ISample;
  * @package deflou\interfaces\fields\types
  * @author jeyroik@gmail.com
  */
-interface IFieldTypeSample extends ISample, IHasClass, IHasOwner
+interface IFieldTypeSample extends ISample, IHasClass, IHasPlayer
 {
 
 }

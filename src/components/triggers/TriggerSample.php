@@ -4,7 +4,7 @@ namespace deflou\components\triggers;
 use deflou\components\applications\activities\THasAction;
 use deflou\components\applications\activities\THasEvent;
 use deflou\interfaces\triggers\ITriggerSample;
-use extas\components\players\THasOwner;
+use extas\components\players\THasPlayer;
 use extas\components\samples\parameters\SampleParameter;
 use extas\components\samples\Sample;
 use extas\interfaces\samples\parameters\ISampleParameter;
@@ -17,7 +17,7 @@ use extas\interfaces\samples\parameters\ISampleParameter;
  */
 class TriggerSample extends Sample implements ITriggerSample
 {
-    use THasOwner;
+    use THasPlayer;
     use THasEvent;
     use THasAction;
 

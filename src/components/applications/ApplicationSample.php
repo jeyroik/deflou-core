@@ -2,7 +2,7 @@
 namespace deflou\components\applications;
 
 use deflou\interfaces\applications\IApplicationSample;
-use extas\components\players\THasOwner;
+use extas\components\players\THasPlayer;
 use extas\components\samples\Sample;
 
 /**
@@ -13,5 +13,5 @@ use extas\components\samples\Sample;
  */
 class ApplicationSample extends Sample implements IApplicationSample
 {
-    use THasOwner;
+    use THasPlayer;
 }

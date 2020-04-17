@@ -4,7 +4,7 @@ namespace deflou\interfaces\triggers;
 use deflou\interfaces\applications\activities\IHasAction;
 use deflou\interfaces\applications\activities\IHasEvent;
 use extas\interfaces\conditions\IConditionParameter;
-use extas\interfaces\players\IHasOwner;
+use extas\interfaces\players\IHasPlayer;
 use extas\interfaces\samples\ISample;
 use extas\interfaces\samples\parameters\ISampleParameter;
 
@@ -14,7 +14,7 @@ use extas\interfaces\samples\parameters\ISampleParameter;
  * @package deflou\interfaces\triggers
  * @author jeyroik@gmail.com
  */
-interface ITriggerSample extends ISample, IHasOwner, IHasEvent, IHasAction
+interface ITriggerSample extends ISample, IHasPlayer, IHasEvent, IHasAction
 {
     public const FIELD__EVENT_PARAMETERS = 'event_parameters';
     public const FIELD__ACTION_PARAMETERS = 'action_parameters';

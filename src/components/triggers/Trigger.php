@@ -1,7 +1,7 @@
 <?php
 namespace deflou\components\triggers;
 
-use deflou\components\THasState;
+use extas\components\THasState;
 use deflou\interfaces\triggers\ITrigger;
 use extas\components\samples\THasSample;
 

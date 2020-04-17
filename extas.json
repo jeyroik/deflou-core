@@ -48,6 +48,10 @@
     {
       "interface": "deflou\\interfaces\\triggers\\ITriggerStateHistoryRepository",
       "class": "deflou\\components\\triggers\\TriggerStateHistoryRepository"
+    },
+    {
+      "interface": "deflou\\interfaces\\triggers\\ITriggerResponseRepository",
+      "class": "deflou\\components\\triggers\\TriggerResponseRepository"
     }
   ],
   "application_samples": [
@@ -55,7 +59,13 @@
       "name": "deflou",
       "title": "DeFlou",
       "description": "DeFlou instance",
+      "player_name": "admin",
       "parameters": {
+        "schema": {
+          "name": "schema",
+          "title": "Schema",
+          "description": "Schema"
+        },
         "host": {
           "name": "host",
           "title": "Host",
@@ -67,8 +77,8 @@
           "description": "Port"
         }
       },
-      "created_at": 0,
-      "updated_at": 0
+      "created_at": "@timestamp(0)",
+      "updated_at": "@timestamp(0)"
     }
   ],
   "application_activity_samples": [
@@ -76,85 +86,56 @@
       "name": "event/nothing",
       "title": "Nothing",
       "description": "Nothing happened",
-      "owner": "admin",
+      "player_name": "admin",
       "type": "event",
       "class": "deflou\\components\\applications\\activities\\events\\EventNothing",
       "parameters": {},
-      "created_at": 0,
-      "updated_at": 0
+      "created_at": "@timestamp(0)",
+      "updated_at": "@timestamp(0)"
     },
     {
       "name": "action/nothing",
       "title": "Nothing",
       "description": "Nothing to do",
-      "owner": "admin",
+      "player_name": "admin",
       "type": "action",
       "class": "deflou\\components\\applications\\activities\\actions\\ActionNothing",
       "parameters": {},
-      "created_at": 0,
-      "updated_at": 0
+      "created_at": "@timestamp(0)",
+      "updated_at": "@timestamp(0)"
     }
   ],
   "plugins": [
     {
-      "class": "deflou\\components\\plugins\\PluginInstallActivities",
+      "class": "extas\\components\\plugins\\repositories\\PluginFieldSampleName",
+      "stage": [
+        "extas.applications.create.before",
+        "extas.activities.create.before",
+        "extas.triggers.create.before",
+        "extas.fields.create.before",
+        "extas.fields_types.create.before"
+      ]
+    },
+    {
+      "class": "extas\\components\\plugins\\repositories\\PluginFieldUuid",
+      "stage": "extas.triggers_responses.create.before"
+    },
+    {
+      "class": [
+        "deflou\\components\\plugins\\PluginInstallActivities",
+        "deflou\\components\\plugins\\PluginInstallActivitySamples",
+        "deflou\\components\\plugins\\PluginInstallAnchors",
+        "deflou\\components\\plugins\\PluginInstallApplications",
+        "deflou\\components\\plugins\\PluginInstallApplicationSamples",
+        "deflou\\components\\plugins\\PluginInstallFields",
+        "deflou\\components\\plugins\\PluginInstallFieldSamples",
+        "deflou\\components\\plugins\\PluginInstallFieldTypes",
+        "deflou\\components\\plugins\\PluginInstallFieldTypeSamples",
+        "deflou\\components\\plugins\\PluginInstallTriggers",
+        "deflou\\components\\plugins\\PluginInstallTriggerSamples",
+        "deflou\\components\\plugins\\PluginInstallTriggerStateHistories"
+      ],
       "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallActivitySamples",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallAnchors",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallApplications",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallApplicationSamples",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallFields",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallFieldSamples",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallFieldTypes",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallFieldTypeSamples",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallTriggers",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallTriggerSamples",
-      "stage": "extas.install"
-    },
-    {
-      "class": "deflou\\components\\plugins\\PluginInstallTriggerStateHistories",
-      "stage": "extas.install"
-    },
-    {
-      "class": "extas\\components\\plugins\\repositories\\PluginUuidField",
-      "stage": "extas.triggers_execution_histories.create.before"
-    },
-    {
-      "class": "extas\\components\\plugins\\repositories\\PluginUuidField",
-      "stage": "extas.triggers_state_histories.create.before"
-    },
-    {
-      "class": "extas\\components\\plugins\\repositories\\PluginUuidField",
-      "stage": "extas.applications_anchors.create.before"
     }
   ]
 }
