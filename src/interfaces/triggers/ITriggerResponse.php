@@ -34,6 +34,8 @@ interface ITriggerResponse extends IItem, IHasCreatedAt, IHasId, IHasTrigger, IH
     public const FIELD__RESPONSE_STATUS = 'response_status';
     public const FIELD__RESPONSE_BODY = 'response_body';
 
+    public const STATUS__SUCCESS = 200;
+
     /**
      * @return string
      */

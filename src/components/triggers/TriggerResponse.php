@@ -252,6 +252,7 @@ class TriggerResponse extends Item implements ITriggerResponse
     public function setResponseStatus(int $status): ITriggerResponse
     {
         $this->config[static::FIELD__RESPONSE_STATUS] = $status;
+        $this->config[static::FIELD__IS_SUCCESS] = $status == static::STATUS__SUCCESS;
 
         return $this;
     }
