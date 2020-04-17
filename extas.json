@@ -100,9 +100,44 @@
       "player_name": "admin",
       "type": "action",
       "class": "deflou\\components\\applications\\activities\\actions\\ActionNothing",
-      "parameters": {},
+      "parameters": {
+        "useless": {
+          "name": "useless",
+          "type": "string20"
+        }
+      },
       "created_at": "@timestamp(0)",
       "updated_at": "@timestamp(0)"
+    }
+  ],
+  "field_types": [
+    {
+      "name": "string20",
+      "class": "\\FieldString",
+      "parameters": {
+        "min_length": {
+          "name": "max_length",
+          "value": 0
+        },
+        "max_length": {
+          "name": "max_length",
+          "value": 20
+        }
+      }
+    }
+  ],
+  "field_type_samples": [
+    {
+      "name": "string",
+      "class": "\\FieldString",
+      "parameters": {
+        "min_length": {
+          "name": "max_length"
+        },
+        "max_length": {
+          "name": "max_length"
+        }
+      }
     }
   ],
   "plugins": [

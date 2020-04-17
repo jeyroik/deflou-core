@@ -5,6 +5,8 @@ use deflou\components\applications\activities\ActivityRepository;
 use deflou\components\applications\activities\ActivitySample;
 use deflou\components\applications\activities\ActivitySampleRepository;
 use deflou\components\applications\anchors\Anchor;
+use deflou\components\applications\anchors\AnchorRepository;
+use deflou\components\applications\anchors\THasAnchor;
 use deflou\components\applications\Application;
 use deflou\components\applications\ApplicationRepository;
 use deflou\components\applications\ApplicationSample;
@@ -19,6 +21,8 @@ use deflou\interfaces\applications\activities\IActivity;
 use deflou\interfaces\applications\activities\IActivityRepository;
 use deflou\interfaces\applications\activities\IActivitySampleRepository;
 use deflou\interfaces\applications\anchors\IAnchor;
+use deflou\interfaces\applications\anchors\IAnchorRepository;
+use deflou\interfaces\applications\anchors\IHasAnchor;
 use deflou\interfaces\applications\IApplicationRepository;
 use deflou\interfaces\applications\IApplicationSampleRepository;
 use deflou\interfaces\triggers\ITrigger;
@@ -26,6 +30,7 @@ use deflou\interfaces\triggers\ITriggerRepository;
 use deflou\interfaces\triggers\ITriggerResponse;
 use deflou\interfaces\triggers\ITriggerResponseRepository;
 use Dotenv\Dotenv;
+use extas\components\Item;
 use extas\components\players\Player;
 use extas\components\players\PlayerRepository;
 use extas\components\plugins\Plugin;
@@ -49,6 +54,7 @@ use extas\components\plugins\PluginRepository;
 class CoreTest extends TestCase
 {
     protected ?IRepository $playerRepo = null;
+    protected ?IRepository $anchorRepo = null;
     protected ?IRepository $appRepo = null;
     protected ?IRepository $appSampleRepo = null;
     protected ?IRepository $activityRepo = null;
@@ -63,6 +69,7 @@ class CoreTest extends TestCase
         $env = Dotenv::create(getcwd() . '/tests/');
         $env->load();
 
+        $this->anchorRepo = new AnchorRepository();
         $this->appRepo = new ApplicationRepository();
         $this->appSampleRepo = new ApplicationSampleRepository();
         $this->activityRepo = new ActivityRepository();
@@ -72,6 +79,10 @@ class CoreTest extends TestCase
         $this->pluginRepo = new PluginRepository();
         $this->triggerRepo = new TriggerRepository();
 
+        SystemContainer::addItem(
+            IAnchorRepository::class,
+            AnchorRepository::class
+        );
         SystemContainer::addItem(
             IApplicationRepository::class,
             ApplicationRepository::class
@@ -104,6 +115,7 @@ class CoreTest extends TestCase
 
     public function tearDown(): void
     {
+        $this->anchorRepo->delete([Anchor::FIELD__ID => 'test']);
         $this->appRepo->delete([Application::FIELD__SAMPLE_NAME => 'test_app']);
         $this->appRepo->delete([Application::FIELD__NAME => 'test']);
         $this->appSampleRepo->delete([ApplicationSample::FIELD__NAME => 'test']);
@@ -379,5 +391,21 @@ class CoreTest extends TestCase
         $now = time();
         $anchor->setLastCallTime($now);
         $this->assertEquals($now, $anchor->getLastCallTime());
+
+        $hasAnchor = new class extends Item implements IHasAnchor {
+            use THasAnchor;
+            protected function getSubjectForExtension(): string
+            {
+                return '';
+            }
+        };
+
+        $hasAnchor->setAnchorId('test');
+        $this->assertEquals('test', $hasAnchor->getAnchorId());
+        $this->anchorRepo->create(new Anchor([
+            Anchor::FIELD__ID => 'test'
+        ]));
+        $this->assertNotEmpty($hasAnchor->getAnchor());
+        $this->assertEquals('test', $hasAnchor->getAnchor()->getId());
     }
 }
