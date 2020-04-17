@@ -1,5 +1,5 @@
 <?php
-
+namespace tests;
 use deflou\components\applications\activities\Activity;
 use deflou\components\applications\activities\ActivityRepository;
 use deflou\components\applications\activities\ActivitySample;
@@ -10,6 +10,7 @@ use deflou\components\applications\ApplicationRepository;
 use deflou\components\applications\ApplicationSample;
 use deflou\components\applications\ApplicationSampleRepository;
 use deflou\components\triggers\TriggerAction;
+use deflou\components\triggers\TriggerRepository;
 use deflou\components\triggers\TriggerResponse;
 use deflou\components\triggers\TriggerResponseRepository;
 use deflou\components\triggers\TriggerSample;
@@ -21,6 +22,7 @@ use deflou\interfaces\applications\anchors\IAnchor;
 use deflou\interfaces\applications\IApplicationRepository;
 use deflou\interfaces\applications\IApplicationSampleRepository;
 use deflou\interfaces\triggers\ITrigger;
+use deflou\interfaces\triggers\ITriggerRepository;
 use deflou\interfaces\triggers\ITriggerResponse;
 use deflou\interfaces\triggers\ITriggerResponseRepository;
 use Dotenv\Dotenv;
@@ -51,6 +53,7 @@ class CoreTest extends TestCase
     protected ?IRepository $appSampleRepo = null;
     protected ?IRepository $activityRepo = null;
     protected ?IRepository $activitySampleRepo = null;
+    protected ?IRepository $triggerRepo = null;
     protected ?IRepository $pluginRepo = null;
     protected ?IRepository $triggersResponsesRepo = null;
 
@@ -67,6 +70,7 @@ class CoreTest extends TestCase
         $this->playerRepo = new PlayerRepository();
         $this->triggersResponsesRepo = new TriggerResponseRepository();
         $this->pluginRepo = new PluginRepository();
+        $this->triggerRepo = new TriggerRepository();
 
         SystemContainer::addItem(
             IApplicationRepository::class,
@@ -83,6 +87,10 @@ class CoreTest extends TestCase
         SystemContainer::addItem(
             IActivitySampleRepository::class,
             ActivitySampleRepository::class
+        );
+        SystemContainer::addItem(
+            ITriggerRepository::class,
+            TriggerRepository::class
         );
         SystemContainer::addItem(
             IPlayerRepository::class,
