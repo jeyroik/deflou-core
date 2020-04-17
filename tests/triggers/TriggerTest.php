@@ -169,13 +169,13 @@ class TriggerTest extends TestCase
             new Activity([
                 Activity::FIELD__TYPE => Activity::TYPE__EVENT,
                 Activity::FIELD__NAME => 'test_action',
-                Activity::FIELD__APPLICATION_NAME => 'test_app',
+                Activity::FIELD__APPLICATION_NAME => $app->getName(),
                 Activity::FIELD__SAMPLE_NAME => 'test_action_sample'
             ]),
             new Activity([
                 Activity::FIELD__TYPE => Activity::TYPE__EVENT,
                 Activity::FIELD__NAME => 'test_event',
-                Activity::FIELD__APPLICATION_NAME => 'test_app',
+                Activity::FIELD__APPLICATION_NAME => $app->getName(),
                 Activity::FIELD__SAMPLE_NAME => 'test_event_sample'
             ]),
             new Trigger([
