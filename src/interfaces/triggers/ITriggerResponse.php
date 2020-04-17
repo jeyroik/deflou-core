@@ -3,11 +3,14 @@ namespace deflou\interfaces\triggers;
 
 use deflou\interfaces\applications\activities\IActivity;
 use deflou\interfaces\applications\activities\IActivitySample;
+use deflou\interfaces\applications\activities\IHasAction;
+use deflou\interfaces\applications\activities\IHasEvent;
 use deflou\interfaces\applications\IApplication;
 use deflou\interfaces\applications\IApplicationSample;
 
 use extas\interfaces\IHasCreatedAt;
 use extas\interfaces\IHasId;
+use extas\interfaces\players\IHasPlayer;
 use extas\interfaces\players\IPlayer;
 use extas\interfaces\IItem;
 
@@ -17,21 +20,17 @@ use extas\interfaces\IItem;
  * @package df\interfaces\triggers
  * @author aivanov@fix.ru
  */
-interface ITriggerResponse extends IItem, IHasCreatedAt, IHasId
+interface ITriggerResponse extends IItem, IHasCreatedAt, IHasId, IHasTrigger, IHasAction, IHasEvent, IHasPlayer
 {
     public const SUBJECT = 'df.trigger.response';
 
     public const FIELD__EVENT_APPLICATION_NAME = 'event_application_name';
     public const FIELD__EVENT_APPLICATION_SAMPLE_NAME = 'event_application_sample_name';
-    public const FIELD__EVENT_NAME = 'event_name';
     public const FIELD__EVENT_SAMPLE_NAME = 'event_sample_name';
     public const FIELD__ACTION_APPLICATION_NAME = 'action_application_name';
     public const FIELD__ACTION_APPLICATION_SAMPLE_NAME = 'action_application_sample_name';
-    public const FIELD__ACTION_NAME = 'action_name';
     public const FIELD__ACTION_SAMPLE_NAME = 'action_sample_name';
     public const FIELD__IS_SUCCESS = 'is_success';
-    public const FIELD__TRIGGER_NAME = 'trigger_id';
-    public const FIELD__PLAYER_NAME = 'player_name';
     public const FIELD__RESPONSE_STATUS = 'response_status';
     public const FIELD__RESPONSE_BODY = 'response_body';
 
@@ -68,23 +67,6 @@ interface ITriggerResponse extends IItem, IHasCreatedAt, IHasId
      * @return IApplicationSample|null
      */
     public function getEventApplicationSample(): ?IApplicationSample;
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string;
-
-    /**
-     * @param string $eventName
-     *
-     * @return $this
-     */
-    public function setEventName(string $eventName): ITriggerResponse;
-
-    /**
-     * @return null|IActivity
-     */
-    public function getEvent(): ?IActivity;
 
     /**
      * @return string
@@ -140,23 +122,6 @@ interface ITriggerResponse extends IItem, IHasCreatedAt, IHasId
     /**
      * @return string
      */
-    public function getActionName(): string;
-
-    /**
-     * @param string $actionName
-     *
-     * @return $this
-     */
-    public function setActionName(string $actionName): ITriggerResponse;
-
-    /**
-     * @return null|IActivity
-     */
-    public function getAction(): ?IActivity;
-
-    /**
-     * @return string
-     */
     public function getActionSampleName(): string;
 
     /**
@@ -170,23 +135,6 @@ interface ITriggerResponse extends IItem, IHasCreatedAt, IHasId
      * @return IActivitySample|null
      */
     public function getActionSample(): ?IActivitySample;
-
-    /**
-     * @return string
-     */
-    public function getTriggerName(): string;
-
-    /**
-     * @param string $triggerId
-     *
-     * @return $this
-     */
-    public function setTriggerName(string $triggerId): ITriggerResponse;
-
-    /**
-     * @return null|ITrigger
-     */
-    public function getTrigger(): ?ITrigger;
 
     /**
      * @return string

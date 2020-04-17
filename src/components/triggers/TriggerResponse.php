@@ -1,8 +1,8 @@
 <?php
 namespace deflou\components\triggers;
 
-use deflou\interfaces\applications\activities\IActivity;
-use deflou\interfaces\applications\activities\IActivityRepository;
+use deflou\components\applications\activities\THasAction;
+use deflou\components\applications\activities\THasEvent;
 use deflou\interfaces\applications\activities\IActivitySample;
 use deflou\interfaces\applications\activities\IActivitySampleRepository;
 use deflou\interfaces\applications\IApplication;
@@ -29,26 +29,8 @@ class TriggerResponse extends Item implements ITriggerResponse
     use THasPlayer;
     use THasId;
     use THasTrigger;
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string
-    {
-        return $this->config[static::FIELD__EVENT_NAME] ?? '';
-    }
-
-    /**
-     * @return IActivity|null
-     */
-    public function getEvent(): ?IActivity
-    {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IActivityRepository::class);
-        return $repo->one([IActivity::FIELD__NAME => $this->getEventName()]);
-    }
+    use THasAction;
+    use THasEvent;
 
     /**
      * @return string
@@ -111,17 +93,6 @@ class TriggerResponse extends Item implements ITriggerResponse
     }
 
     /**
-     * @param string $eventName
-     * @return ITriggerResponse
-     */
-    public function setEventName(string $eventName): ITriggerResponse
-    {
-        $this->config[static::FIELD__EVENT_NAME] = $eventName;
-
-        return $this;
-    }
-
-    /**
      * @param string $sampleName
      * @return ITriggerResponse
      */
@@ -152,26 +123,6 @@ class TriggerResponse extends Item implements ITriggerResponse
         $this->config[static::FIELD__EVENT_APPLICATION_SAMPLE_NAME] = $applicationSample;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getActionName(): string
-    {
-        return $this->config[static::FIELD__ACTION_NAME] ?? '';
-    }
-
-    /**
-     * @return IActivity|null
-     */
-    public function getAction(): ?IActivity
-    {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IActivityRepository::class);
-        return $repo->one([IActivity::FIELD__NAME => $this->getActionName()]);
     }
 
     /**
@@ -232,17 +183,6 @@ class TriggerResponse extends Item implements ITriggerResponse
          */
         $repo = SystemContainer::getItem(IApplicationSampleRepository::class);
         return $repo->one([IApplicationSample::FIELD__NAME => $this->getActionApplicationSampleName()]);
-    }
-
-    /**
-     * @param string $actionName
-     * @return ITriggerResponse
-     */
-    public function setActionName(string $actionName): ITriggerResponse
-    {
-        $this->config[static::FIELD__ACTION_NAME] = $actionName;
-
-        return $this;
     }
 
     /**
