@@ -17,17 +17,6 @@ class Activity extends ActivitySample implements IActivity
     use THasSample;
     use THasApplication;
 
-    public function getFields(): array
-    {
-        $params = $this->getParameters();
-        $fields = [];
-        foreach ($params as $param) {
-            $fields[] = new Field($param->__toArray());
-        }
-
-        return $fields;
-    }
-
     /**
      * @return string
      */
