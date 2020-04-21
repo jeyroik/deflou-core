@@ -175,5 +175,13 @@
       ],
       "stage": "extas.install"
     }
+  ],
+  "extensions": [
+    {
+      "class": "extas\\components\\extensions\\ExtensionHasCondition",
+      "interface": "extas\\interfaces\\extensions\\IExtensionHasCondition",
+      "methods": ["isConditionTrue", "getCondition", "getConditionName", "setConditionName"],
+      "subject": "extas.sample.parameter"
+    }
   ]
 }
