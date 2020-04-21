@@ -4,6 +4,8 @@ use deflou\components\applications\activities\Activity;
 use deflou\components\applications\activities\ActivityRepository;
 use deflou\components\applications\activities\ActivitySample;
 use deflou\components\applications\activities\ActivitySampleRepository;
+use deflou\components\applications\activities\THasAction;
+use deflou\components\applications\activities\THasEvent;
 use deflou\components\applications\anchors\Anchor;
 use deflou\components\applications\anchors\AnchorRepository;
 use deflou\components\applications\anchors\THasAnchor;
@@ -20,6 +22,8 @@ use deflou\components\triggers\TriggerStateHistory;
 use deflou\interfaces\applications\activities\IActivity;
 use deflou\interfaces\applications\activities\IActivityRepository;
 use deflou\interfaces\applications\activities\IActivitySampleRepository;
+use deflou\interfaces\applications\activities\IHasAction;
+use deflou\interfaces\applications\activities\IHasEvent;
 use deflou\interfaces\applications\anchors\IAnchor;
 use deflou\interfaces\applications\anchors\IAnchorRepository;
 use deflou\interfaces\applications\anchors\IHasAnchor;
@@ -407,5 +411,37 @@ class CoreTest extends TestCase
         ]));
         $this->assertNotEmpty($hasAnchor->getAnchor());
         $this->assertEquals('test', $hasAnchor->getAnchor()->getId());
+    }
+
+    public function testHasNotEvent()
+    {
+        $hasEvent = new class([
+            IHasEvent::FIELD__EVENT_NAME => 'unknown'
+        ]) extends Item implements IHasEvent {
+            use THasEvent;
+            protected function getSubjectForExtension(): string
+            {
+                return '';
+            }
+        };
+
+        $this->expectExceptionMessage('Missed event "unknown"');
+        $hasEvent->getEvent();
+    }
+
+    public function testHasNotAction()
+    {
+        $hasAction = new class([
+            IHasAction::FIELD__ACTION_NAME => 'unknown'
+        ]) extends Item implements IHasAction {
+            use THasAction;
+            protected function getSubjectForExtension(): string
+            {
+                return '';
+            }
+        };
+
+        $this->expectExceptionMessage('Missed action "unknown"');
+        $hasAction->getAction();
     }
 }
