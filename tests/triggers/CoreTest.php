@@ -426,7 +426,7 @@ class CoreTest extends TestCase
         };
 
         $this->expectExceptionMessage('Missed event "unknown"');
-        $hasEvent->getEvent();
+        $hasEvent->getEvent(true);
     }
 
     public function testHasNotAction()
@@ -442,6 +442,6 @@ class CoreTest extends TestCase
         };
 
         $this->expectExceptionMessage('Missed action "unknown"');
-        $hasAction->getAction();
+        $hasAction->getAction(true);
     }
 }
