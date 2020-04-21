@@ -25,19 +25,27 @@ trait THasAction
     }
 
     /**
+     * @param bool $required if action is required and missed, than throw an exception
      * @return IActivity|null
+     * @throws \Exception
      */
-    public function getAction(): ?IActivity
+    public function getAction(bool $required = false): ?IActivity
     {
         /**
          * @var $repo IActivityRepository
          */
         $repo = SystemContainer::getItem(IActivityRepository::class);
 
-        return $repo->one([
+        $action = $repo->one([
             IActivity::FIELD__NAME => $this->getActionName(),
             IActivity::FIELD__TYPE => IActivity::TYPE__ACTION
         ]);
+
+        if ($required and !$action) {
+            throw new \Exception('Missed action "' . $this->getActionName() . '"');
+        }
+
+        return $action;
     }
 
     /**

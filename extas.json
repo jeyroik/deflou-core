@@ -153,7 +153,10 @@
     },
     {
       "class": "extas\\components\\plugins\\repositories\\PluginFieldUuid",
-      "stage": "extas.triggers_responses.create.before"
+      "stage": [
+        "extas.triggers_responses.create.before",
+        "extas.anchors.create.before"
+      ]
     },
     {
       "class": [

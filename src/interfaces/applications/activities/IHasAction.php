@@ -17,9 +17,11 @@ interface IHasAction
     public function getActionName(): string;
 
     /**
+     * @param bool $required if action is required and missed, than throw an exception
      * @return IActivity|null
+     * @throws \Exception
      */
-    public function getAction(): ?IActivity;
+    public function getAction(bool $required = false): ?IActivity;
 
     /**
      * @param string $actionName

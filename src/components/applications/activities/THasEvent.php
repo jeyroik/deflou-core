@@ -25,19 +25,27 @@ trait THasEvent
     }
 
     /**
+     * @param bool $required if event is required and missed, than an exception is thrown
      * @return IActivity|null
+     * @throws \Exception
      */
-    public function getEvent(): ?IActivity
+    public function getEvent(bool $required = false): ?IActivity
     {
         /**
          * @var $repo IActivityRepository
          */
         $repo = SystemContainer::getItem(IActivityRepository::class);
         
-        return $repo->one([
+        $event = $repo->one([
             IActivity::FIELD__NAME => $this->getEventName(),
             IActivity::FIELD__TYPE => IActivity::TYPE__EVENT
         ]);
+
+        if ($required and !$event) {
+            throw new \Exception('Missed event "' . $this->getEventName() . '"');
+        }
+
+        return $event;
     }
 
     /**

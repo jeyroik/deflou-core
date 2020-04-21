@@ -17,9 +17,11 @@ interface IHasEvent
     public function getEventName(): string;
 
     /**
+     * @param bool $required if event is required and missed, than an exception is thrown
      * @return IActivity|null
+     * @throws \Exception
      */
-    public function getEvent(): ?IActivity;
+    public function getEvent(bool $required = false): ?IActivity;
 
     /**
      * @param string $eventName
