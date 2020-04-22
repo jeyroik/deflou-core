@@ -22,6 +22,17 @@ class TriggerSample extends Sample implements ITriggerSample
     use THasAction;
 
     /**
+     * @param string $name
+     * @return ISampleParameter|null
+     */
+    public function getEventParameter(string $name): ?ISampleParameter
+    {
+        $eventParams = $this->config[static::FIELD__EVENT_PARAMETERS] ?? [];
+
+        return isset($eventParams[$name]) ? new SampleParameter($eventParams[$name]) : null;
+    }
+
+    /**
      * @return ISampleParameter[]
      */
     public function getEventParameters(): array
@@ -42,6 +53,17 @@ class TriggerSample extends Sample implements ITriggerSample
     public function getEventParametersOptions(): array
     {
         return $this->config[static::FIELD__EVENT_PARAMETERS] ?? [];
+    }
+
+    /**
+     * @param string $name
+     * @return ISampleParameter|null
+     */
+    public function getActionParameter(string $name): ?ISampleParameter
+    {
+        $actionParams = $this->config[static::FIELD__ACTION_PARAMETERS] ?? [];
+
+        return isset($actionParams[$name]) ? new SampleParameter($actionParams[$name]) : null;
     }
 
     /**

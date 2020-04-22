@@ -20,6 +20,12 @@ interface ITriggerSample extends ISample, IHasPlayer, IHasEvent, IHasAction
     public const FIELD__ACTION_PARAMETERS = 'action_parameters';
 
     /**
+     * @param string $name
+     * @return ISampleParameter|null
+     */
+    public function getEventParameter(string $name): ?ISampleParameter;
+
+    /**
      * @return IConditionParameter[]
      */
     public function getEventParameters(): array;
@@ -28,6 +34,12 @@ interface ITriggerSample extends ISample, IHasPlayer, IHasEvent, IHasAction
      * @return array
      */
     public function getEventParametersOptions(): array;
+
+    /**
+     * @param string $name
+     * @return ISampleParameter|null
+     */
+    public function getActionParameter(string $name): ?ISampleParameter;
 
     /**
      * @return ISampleParameter[]

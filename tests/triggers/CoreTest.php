@@ -163,6 +163,8 @@ class CoreTest extends TestCase
             ])
         ]);
         $this->assertCount(2, $sample->getEventParameters());
+        $this->assertEquals('test1-v', $sample->getEventParameter('test1')->getValue());
+        $this->assertEquals(null, $sample->getEventParameter('test1-unknown'));
 
         $sample->setActionParametersOptions([
             [
@@ -184,6 +186,8 @@ class CoreTest extends TestCase
             ])
         ]);
         $this->assertCount(2, $sample->getActionParameters());
+        $this->assertEquals('test1-v', $sample->getActionParameter('test1')->getValue());
+        $this->assertEquals(null, $sample->getActionParameter('test1-unknown'));
     }
 
     public function testStateHistory()
