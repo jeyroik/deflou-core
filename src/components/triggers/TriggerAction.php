@@ -7,11 +7,12 @@ use deflou\interfaces\triggers\ITrigger;
 use deflou\interfaces\triggers\ITriggerAction;
 use deflou\interfaces\triggers\ITriggerResponse;
 use extas\components\Item;
+use extas\interfaces\repositories\IRepository;
 
 /**
  * Class TriggerAction
  *
- * @method triggerResponseRepository()
+ * @method IRepository deflouTriggerResponseRepository()
  *
  * @package deflou\components\triggers
  * @author jeyroik@gmail.com
@@ -36,7 +37,7 @@ abstract class TriggerAction extends Item implements ITriggerAction
         int $status
     ): ITriggerResponse
     {
-        return $this->triggerResponseRepository()->create(new TriggerResponse([
+        return $this->deflouTriggerResponseRepository()->create(new TriggerResponse([
             TriggerResponse::FIELD__ID => '@uuid6',
             TriggerResponse::FIELD__PLAYER_NAME => $anchor->getPlayerName(),
             TriggerResponse::FIELD__TRIGGER_NAME => $trigger->getName(),

@@ -11,14 +11,15 @@ use extas\components\Item;
 use extas\components\players\THasPlayer;
 use extas\components\THasCreatedAt;
 use extas\components\THasId;
+use extas\interfaces\repositories\IRepository;
 
 /**
  * Class TriggerResponse
  *
- * @method activityRepository()
- * @method applicationRepository()
- * @method activitySampleRepository()
- * @method applicationSampleRepository()
+ * @method IRepository deflouActivityRepository()
+ * @method IRepository deflouApplicationRepository()
+ * @method IRepository deflouActivitySampleRepository()
+ * @method IRepository deflouApplicationSampleRepository()
  *
  * @package deflou\components\triggers
  * @author jeyroik@gmail.com
@@ -45,7 +46,9 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventSample(): ?IActivitySample
     {
-        return $this->activitySampleRepository()->one([IActivitySample::FIELD__NAME => $this->getEventSampleName()]);
+        return $this->deflouActivitySampleRepository()->one([
+            IActivitySample::FIELD__NAME => $this->getEventSampleName()
+        ]);
     }
 
     /**
@@ -61,7 +64,9 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventApplication(): ?IApplication
     {
-        return $this->applicationRepository()->one([IApplication::FIELD__NAME => $this->getEventApplicationName()]);
+        return $this->deflouApplicationRepository()->one([
+            IApplication::FIELD__NAME => $this->getEventApplicationName()
+        ]);
     }
 
     /**
@@ -77,7 +82,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventApplicationSample(): ?IApplicationSample
     {
-        return $this->applicationSampleRepository()->one([
+        return $this->deflouApplicationSampleRepository()->one([
             IApplicationSample::FIELD__NAME => $this->getEventApplicationSampleName()
         ]);
     }
@@ -128,7 +133,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionSample(): ?IActivitySample
     {
-        return $this->activitySampleRepository()->one([
+        return $this->deflouActivitySampleRepository()->one([
             IApplicationSample::FIELD__NAME => $this->getActionSampleName()
         ]);
     }
@@ -146,7 +151,9 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionApplication(): ?IApplication
     {
-        return $this->applicationRepository()->one([IApplication::FIELD__NAME => $this->getActionApplicationName()]);
+        return $this->deflouApplicationRepository()->one([
+            IApplication::FIELD__NAME => $this->getActionApplicationName()
+        ]);
     }
 
     /**
@@ -162,7 +169,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionApplicationSample(): ?IApplicationSample
     {
-        return $this->applicationSampleRepository()->one([
+        return $this->deflouApplicationSampleRepository()->one([
             IApplicationSample::FIELD__NAME => $this->getActionApplicationSampleName()
         ]);
     }
