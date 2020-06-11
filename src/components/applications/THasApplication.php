@@ -2,14 +2,14 @@
 namespace deflou\components\applications;
 
 use deflou\interfaces\applications\IApplication;
-use deflou\interfaces\applications\IApplicationRepository;
 use deflou\interfaces\applications\IHasApplication;
-use extas\components\SystemContainer;
+use extas\interfaces\repositories\IRepository;
 
 /**
  * Trait THasApplication
  *
  * @property $config
+ * @method IRepository deflouApplicationRepository()
  *
  * @package deflou\components\applications
  * @author jeyroik <jeyroik@gmail.com>
@@ -29,12 +29,7 @@ trait THasApplication
      */
     public function getApplication(): ?IApplication
     {
-        /**
-         * @var $repo IApplicationRepository
-         */
-        $repo = SystemContainer::getItem(IApplicationRepository::class);
-
-        return $repo->one([IApplication::FIELD__NAME => $this->getApplicationName()]);
+        return $this->deflouApplicationRepository()->one([IApplication::FIELD__NAME => $this->getApplicationName()]);
     }
 
     /**

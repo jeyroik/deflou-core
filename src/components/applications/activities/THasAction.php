@@ -2,14 +2,15 @@
 namespace deflou\components\applications\activities;
 
 use deflou\interfaces\applications\activities\IActivity;
-use deflou\interfaces\applications\activities\IActivityRepository;
 use deflou\interfaces\applications\activities\IHasAction;
-use extas\components\SystemContainer;
+use extas\components\exceptions\MissedOrUnknown;
+use extas\interfaces\repositories\IRepository;
 
 /**
  * Trait THasAction
  *
  * @property $config
+ * @method IRepository deflouActivityRepository()
  *
  * @package deflou\components\applications\activities
  * @author jeyroik@gmail.com
@@ -27,22 +28,17 @@ trait THasAction
     /**
      * @param bool $required if action is required and missed, than throw an exception
      * @return IActivity|null
-     * @throws \Exception
+     * @throws MissedOrUnknown
      */
     public function getAction(bool $required = false): ?IActivity
     {
-        /**
-         * @var $repo IActivityRepository
-         */
-        $repo = SystemContainer::getItem(IActivityRepository::class);
-
-        $action = $repo->one([
+        $action = $this->deflouActivityRepository()->one([
             IActivity::FIELD__NAME => $this->getActionName(),
             IActivity::FIELD__TYPE => IActivity::TYPE__ACTION
         ]);
 
         if ($required and !$action) {
-            throw new \Exception('Missed action "' . $this->getActionName() . '"');
+            throw new MissedOrUnknown('action ' . $this->getActionName());
         }
 
         return $action;

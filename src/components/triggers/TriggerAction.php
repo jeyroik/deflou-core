@@ -6,12 +6,12 @@ use deflou\interfaces\applications\anchors\IAnchor;
 use deflou\interfaces\triggers\ITrigger;
 use deflou\interfaces\triggers\ITriggerAction;
 use deflou\interfaces\triggers\ITriggerResponse;
-use deflou\interfaces\triggers\ITriggerResponseRepository;
 use extas\components\Item;
-use extas\components\SystemContainer;
 
 /**
  * Class TriggerAction
+ *
+ * @method triggerResponseRepository()
  *
  * @package deflou\components\triggers
  * @author jeyroik@gmail.com
@@ -36,12 +36,7 @@ abstract class TriggerAction extends Item implements ITriggerAction
         int $status
     ): ITriggerResponse
     {
-        /**
-         * @var ITriggerResponseRepository $repo
-         * @var ITriggerResponse $response
-         */
-        $repo = SystemContainer::getItem(ITriggerResponseRepository::class);
-        return $repo->create(new TriggerResponse([
+        return $this->triggerResponseRepository()->create(new TriggerResponse([
             TriggerResponse::FIELD__ID => '@uuid6',
             TriggerResponse::FIELD__PLAYER_NAME => $anchor->getPlayerName(),
             TriggerResponse::FIELD__TRIGGER_NAME => $trigger->getName(),

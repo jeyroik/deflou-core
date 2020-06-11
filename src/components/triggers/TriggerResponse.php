@@ -4,21 +4,21 @@ namespace deflou\components\triggers;
 use deflou\components\applications\activities\THasAction;
 use deflou\components\applications\activities\THasEvent;
 use deflou\interfaces\applications\activities\IActivitySample;
-use deflou\interfaces\applications\activities\IActivitySampleRepository;
 use deflou\interfaces\applications\IApplication;
-use deflou\interfaces\applications\IApplicationRepository;
 use deflou\interfaces\applications\IApplicationSample;
-use deflou\interfaces\applications\IApplicationSampleRepository;
 use deflou\interfaces\triggers\ITriggerResponse;
 use extas\components\Item;
 use extas\components\players\THasPlayer;
-use extas\components\SystemContainer;
 use extas\components\THasCreatedAt;
 use extas\components\THasId;
-use extas\interfaces\repositories\IRepository;
 
 /**
  * Class TriggerResponse
+ *
+ * @method activityRepository()
+ * @method applicationRepository()
+ * @method activitySampleRepository()
+ * @method applicationSampleRepository()
  *
  * @package deflou\components\triggers
  * @author jeyroik@gmail.com
@@ -45,11 +45,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventSample(): ?IActivitySample
     {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IActivitySampleRepository::class);
-        return $repo->one([IActivitySample::FIELD__NAME => $this->getEventSampleName()]);
+        return $this->activitySampleRepository()->one([IActivitySample::FIELD__NAME => $this->getEventSampleName()]);
     }
 
     /**
@@ -65,11 +61,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventApplication(): ?IApplication
     {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IApplicationRepository::class);
-        return $repo->one([IApplication::FIELD__NAME => $this->getEventApplicationName()]);
+        return $this->applicationRepository()->one([IApplication::FIELD__NAME => $this->getEventApplicationName()]);
     }
 
     /**
@@ -85,11 +77,9 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventApplicationSample(): ?IApplicationSample
     {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IApplicationSampleRepository::class);
-        return $repo->one([IApplicationSample::FIELD__NAME => $this->getEventApplicationSampleName()]);
+        return $this->applicationSampleRepository()->one([
+            IApplicationSample::FIELD__NAME => $this->getEventApplicationSampleName()
+        ]);
     }
 
     /**
@@ -138,11 +128,9 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionSample(): ?IActivitySample
     {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IActivitySampleRepository::class);
-        return $repo->one([IApplicationSample::FIELD__NAME => $this->getActionSampleName()]);
+        return $this->activitySampleRepository()->one([
+            IApplicationSample::FIELD__NAME => $this->getActionSampleName()
+        ]);
     }
 
     /**
@@ -158,11 +146,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionApplication(): ?IApplication
     {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IApplicationRepository::class);
-        return $repo->one([IApplication::FIELD__NAME => $this->getActionApplicationName()]);
+        return $this->applicationRepository()->one([IApplication::FIELD__NAME => $this->getActionApplicationName()]);
     }
 
     /**
@@ -178,11 +162,9 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionApplicationSample(): ?IApplicationSample
     {
-        /**
-         * @var IRepository $repo
-         */
-        $repo = SystemContainer::getItem(IApplicationSampleRepository::class);
-        return $repo->one([IApplicationSample::FIELD__NAME => $this->getActionApplicationSampleName()]);
+        return $this->applicationSampleRepository()->one([
+            IApplicationSample::FIELD__NAME => $this->getActionApplicationSampleName()
+        ]);
     }
 
     /**

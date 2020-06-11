@@ -1,5 +1,14 @@
 <?php
 namespace tests;
+
+use deflou\interfaces\applications\activities\IActivity;
+use deflou\interfaces\applications\activities\IHasAction;
+use deflou\interfaces\applications\activities\IHasEvent;
+use deflou\interfaces\applications\anchors\IAnchor;
+use deflou\interfaces\applications\anchors\IHasAnchor;
+use deflou\interfaces\triggers\ITrigger;
+use deflou\interfaces\triggers\ITriggerResponse;
+
 use deflou\components\applications\activities\Activity;
 use deflou\components\applications\activities\ActivityRepository;
 use deflou\components\applications\activities\ActivitySample;
@@ -19,35 +28,22 @@ use deflou\components\triggers\TriggerResponse;
 use deflou\components\triggers\TriggerResponseRepository;
 use deflou\components\triggers\TriggerSample;
 use deflou\components\triggers\TriggerStateHistory;
-use deflou\interfaces\applications\activities\IActivity;
-use deflou\interfaces\applications\activities\IActivityRepository;
-use deflou\interfaces\applications\activities\IActivitySampleRepository;
-use deflou\interfaces\applications\activities\IHasAction;
-use deflou\interfaces\applications\activities\IHasEvent;
-use deflou\interfaces\applications\anchors\IAnchor;
-use deflou\interfaces\applications\anchors\IAnchorRepository;
-use deflou\interfaces\applications\anchors\IHasAnchor;
-use deflou\interfaces\applications\IApplicationRepository;
-use deflou\interfaces\applications\IApplicationSampleRepository;
-use deflou\interfaces\triggers\ITrigger;
-use deflou\interfaces\triggers\ITriggerRepository;
-use deflou\interfaces\triggers\ITriggerResponse;
-use deflou\interfaces\triggers\ITriggerResponseRepository;
-use Dotenv\Dotenv;
+use deflou\components\triggers\Trigger;
+
+use extas\interfaces\samples\parameters\ISampleParameter;
+
+use extas\components\plugins\PluginRepository;
 use extas\components\Item;
 use extas\components\players\Player;
 use extas\components\players\PlayerRepository;
-use extas\components\plugins\Plugin;
 use extas\components\plugins\repositories\PluginFieldSampleName;
 use extas\components\plugins\repositories\PluginFieldUuid;
+use extas\components\plugins\TSnuffPlugins;
+use extas\components\repositories\TSnuffRepository;
 use extas\components\samples\parameters\SampleParameter;
-use extas\components\SystemContainer;
-use extas\interfaces\players\IPlayerRepository;
-use extas\interfaces\samples\parameters\ISampleParameter;
+
+use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
-use deflou\components\triggers\Trigger;
-use extas\interfaces\repositories\IRepository;
-use extas\components\plugins\PluginRepository;
 
 /**
  * Class TriggerTest
@@ -57,77 +53,30 @@ use extas\components\plugins\PluginRepository;
  */
 class CoreTest extends TestCase
 {
-    protected ?IRepository $playerRepo = null;
-    protected ?IRepository $anchorRepo = null;
-    protected ?IRepository $appRepo = null;
-    protected ?IRepository $appSampleRepo = null;
-    protected ?IRepository $activityRepo = null;
-    protected ?IRepository $activitySampleRepo = null;
-    protected ?IRepository $triggerRepo = null;
-    protected ?IRepository $pluginRepo = null;
-    protected ?IRepository $triggersResponsesRepo = null;
+    use TSnuffRepository;
+    use TSnuffPlugins;
 
     protected function setUp(): void
     {
         parent::setUp();
         $env = Dotenv::create(getcwd() . '/tests/');
         $env->load();
-
-        $this->anchorRepo = new AnchorRepository();
-        $this->appRepo = new ApplicationRepository();
-        $this->appSampleRepo = new ApplicationSampleRepository();
-        $this->activityRepo = new ActivityRepository();
-        $this->activitySampleRepo = new ActivitySampleRepository();
-        $this->playerRepo = new PlayerRepository();
-        $this->triggersResponsesRepo = new TriggerResponseRepository();
-        $this->pluginRepo = new PluginRepository();
-        $this->triggerRepo = new TriggerRepository();
-
-        SystemContainer::addItem(
-            IAnchorRepository::class,
-            AnchorRepository::class
-        );
-        SystemContainer::addItem(
-            IApplicationRepository::class,
-            ApplicationRepository::class
-        );
-        SystemContainer::addItem(
-            IApplicationSampleRepository::class,
-            ApplicationSampleRepository::class
-        );
-        SystemContainer::addItem(
-            IActivityRepository::class,
-            ActivityRepository::class
-        );
-        SystemContainer::addItem(
-            IActivitySampleRepository::class,
-            ActivitySampleRepository::class
-        );
-        SystemContainer::addItem(
-            ITriggerRepository::class,
-            TriggerRepository::class
-        );
-        SystemContainer::addItem(
-            IPlayerRepository::class,
-            PlayerRepository::class
-        );
-        SystemContainer::addItem(
-            ITriggerResponseRepository::class,
-            TriggerResponseRepository::class
-        );
+        $this->registerSnuffRepos([
+            'deflouAnchorRepository' => AnchorRepository::class,
+            'deflouApplicationRepository' => ApplicationRepository::class,
+            'deflouApplicationSampleRepository' => ApplicationSampleRepository::class,
+            'deflouActivityRepository' => ActivityRepository::class,
+            'deflouActivitySampleRepository' => ActivitySampleRepository::class,
+            'deflouTriggerRepository' => TriggerRepository::class,
+            'playerRepository' => PlayerRepository::class,
+            'deflouTriggerResponseRepository' => TriggerResponseRepository::class,
+            'pluginRepository' => PluginRepository::class
+        ]);
     }
 
     public function tearDown(): void
     {
-        $this->anchorRepo->delete([Anchor::FIELD__ID => 'test']);
-        $this->appRepo->delete([Application::FIELD__SAMPLE_NAME => 'test_app']);
-        $this->appRepo->delete([Application::FIELD__NAME => 'test']);
-        $this->appSampleRepo->delete([ApplicationSample::FIELD__NAME => 'test']);
-        $this->activityRepo->delete([Activity::FIELD__NAME => 'test']);
-        $this->activitySampleRepo->delete([ActivitySample::FIELD__NAME => 'test']);
-        $this->playerRepo->delete([Player::FIELD__NAME => 'test']);
-        $this->triggersResponsesRepo->delete([TriggerResponse::FIELD__PLAYER_NAME => 'test_player']);
-        $this->pluginRepo->delete([Plugin::FIELD__STAGE => 'extas.triggers_responses.create.before']);
+        $this->unregisterSnuffRepos();
     }
 
     public function testSetAndGetExecutionTime()
@@ -227,11 +176,8 @@ class CoreTest extends TestCase
         ]);
         $samplePlugin = new PluginFieldSampleName();
         $samplePlugin($app);
-        $this->appRepo->create($app);
-        $this->pluginRepo->create(new Plugin([
-            Plugin::FIELD__CLASS => PluginFieldUuid::class,
-            Plugin::FIELD__STAGE => 'extas.triggers_responses.create.before'
-        ]));
+        $this->createWithSnuffRepo('deflouApplicationRepository', $app);
+        $this->createSnuffPlugin(PluginFieldUuid::class, ['extas.triggers_responses.create.before']);
 
         $response = $action(
             new Activity([
@@ -259,7 +205,10 @@ class CoreTest extends TestCase
         /**
          * @var ITriggerResponse $responseFromDb
          */
-        $responseFromDb = $this->triggersResponsesRepo->one([TriggerResponse::FIELD__ID => $response->getId()]);
+        $responseFromDb = $this->oneSnuffRepos(
+            'deflouTriggerResponseRepository',
+            [TriggerResponse::FIELD__ID => $response->getId()]
+        );
         $this->assertEquals('test_player', $responseFromDb->getPlayerName());
     }
 
@@ -275,7 +224,7 @@ class CoreTest extends TestCase
         $response->setActionApplicationName('test');
         $this->assertEquals('test', $response->getActionApplicationName());
 
-        $this->appRepo->create(new Application([
+        $this->createWithSnuffRepo('deflouApplicationRepository', new Application([
             Application::FIELD__NAME => 'test',
             Application::FIELD__SAMPLE_NAME => 'test'
         ]));
@@ -286,7 +235,7 @@ class CoreTest extends TestCase
         $response->setActionName('test');
         $this->assertEquals('test', $response->getActionName());
 
-        $this->activityRepo->create(new Activity([
+        $this->createWithSnuffRepo('deflouActivityRepository', new Activity([
             Activity::FIELD__NAME => 'test',
             Activity::FIELD__TYPE => Activity::TYPE__ACTION,
             Activity::FIELD__APPLICATION_NAME => 'test'
@@ -304,7 +253,7 @@ class CoreTest extends TestCase
         $response->setActionSampleName('test');
         $this->assertEquals('test', $response->getActionSampleName());
 
-        $this->activitySampleRepo->create(new ActivitySample([
+        $this->createWithSnuffRepo('deflouActivitySampleRepository', new ActivitySample([
             ActivitySample::FIELD__NAME => 'test'
         ]));
 
@@ -314,7 +263,7 @@ class CoreTest extends TestCase
         $response->setActionApplicationSampleName('test');
         $this->assertEquals('test', $response->getActionApplicationSampleName());
 
-        $this->appSampleRepo->create(new ApplicationSample([
+        $this->createWithSnuffRepo('deflouApplicationSampleRepository', new ApplicationSample([
             ApplicationSample::FIELD__NAME => 'test'
         ]));
 
@@ -332,7 +281,7 @@ class CoreTest extends TestCase
         $response->setEventName('test');
         $this->assertEquals('test', $response->getEventName());
 
-        $this->activityRepo->create(new Activity([
+        $this->createWithSnuffRepo('deflouActivityRepository', new Activity([
             Activity::FIELD__NAME => 'test',
             Activity::FIELD__TYPE => Activity::TYPE__EVENT,
             Activity::FIELD__APPLICATION_NAME => 'test'
@@ -358,13 +307,12 @@ class CoreTest extends TestCase
         $response->setTriggerName('test');
         $this->assertEquals('test', $response->getTriggerName());
 
-        $this->triggerRepo->create(new Trigger([
+        $this->createWithSnuffRepo('deflouTriggerRepository', new Trigger([
             Trigger::FIELD__NAME => 'test'
         ]));
 
         $this->assertNotEmpty($response->getTrigger());
         $this->assertEquals('test', $response->getTrigger()->getName());
-
 
         // response
 
@@ -380,7 +328,7 @@ class CoreTest extends TestCase
         $response->setPlayerName('test');
         $this->assertEquals('test', $response->getPlayerName());
 
-        $this->playerRepo->create(new Player([
+        $this->createWithSnuffRepo('playerRepository', new Player([
             Player::FIELD__NAME => 'test'
         ]));
 
@@ -410,7 +358,7 @@ class CoreTest extends TestCase
 
         $hasAnchor->setAnchorId('test');
         $this->assertEquals('test', $hasAnchor->getAnchorId());
-        $this->anchorRepo->create(new Anchor([
+        $this->createWithSnuffRepo('deflouAnchorRepository', new Anchor([
             Anchor::FIELD__ID => 'test'
         ]));
         $this->assertNotEmpty($hasAnchor->getAnchor());

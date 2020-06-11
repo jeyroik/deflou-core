@@ -1,9 +1,9 @@
 <?php
 namespace deflou\components\triggers;
 
-use extas\components\THasState;
 use deflou\interfaces\triggers\ITrigger;
 use extas\components\samples\THasSample;
+use extas\components\THasState;
 
 /**
  * Class Trigger
@@ -52,5 +52,13 @@ class Trigger extends TriggerSample implements ITrigger
         $this->config[static::FIELD__EXECUTION_LAST_TIME] = $executionTime;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSubjectForExtension(): string
+    {
+        return 'deflou.trigger';
     }
 }

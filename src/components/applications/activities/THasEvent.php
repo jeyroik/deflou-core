@@ -2,14 +2,15 @@
 namespace deflou\components\applications\activities;
 
 use deflou\interfaces\applications\activities\IActivity;
-use deflou\interfaces\applications\activities\IActivityRepository;
 use deflou\interfaces\applications\activities\IHasEvent;
-use extas\components\SystemContainer;
+use extas\components\exceptions\MissedOrUnknown;
+use extas\interfaces\repositories\IRepository;
 
 /**
  * Trait THasEvent
  * 
  * @property $config
+ * @method IRepository deflouActivityRepository()
  * 
  * @package deflou\components\applications\activities
  * @author jeyroik@gmail.com
@@ -27,22 +28,17 @@ trait THasEvent
     /**
      * @param bool $required if event is required and missed, than an exception is thrown
      * @return IActivity|null
-     * @throws \Exception
+     * @throws MissedOrUnknown
      */
     public function getEvent(bool $required = false): ?IActivity
     {
-        /**
-         * @var $repo IActivityRepository
-         */
-        $repo = SystemContainer::getItem(IActivityRepository::class);
-        
-        $event = $repo->one([
+        $event = $this->deflouActivityRepository()->one([
             IActivity::FIELD__NAME => $this->getEventName(),
             IActivity::FIELD__TYPE => IActivity::TYPE__EVENT
         ]);
 
         if ($required and !$event) {
-            throw new \Exception('Missed event "' . $this->getEventName() . '"');
+            throw new MissedOrUnknown('event ' . $this->getEventName());
         }
 
         return $event;

@@ -7,6 +7,7 @@ use deflou\interfaces\triggers\ITriggerSample;
 use extas\components\players\THasPlayer;
 use extas\components\samples\parameters\SampleParameter;
 use extas\components\samples\Sample;
+use extas\components\THasTags;
 use extas\interfaces\samples\parameters\ISampleParameter;
 
 /**
@@ -20,6 +21,7 @@ class TriggerSample extends Sample implements ITriggerSample
     use THasPlayer;
     use THasEvent;
     use THasAction;
+    use THasTags;
 
     /**
      * @param string $name
@@ -139,5 +141,13 @@ class TriggerSample extends Sample implements ITriggerSample
         $this->config[static::FIELD__ACTION_PARAMETERS] = $parametersOptions;
         
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSubjectForExtension(): string
+    {
+        return 'deflou.trigger.sample';
     }
 }

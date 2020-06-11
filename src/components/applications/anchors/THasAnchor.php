@@ -2,14 +2,14 @@
 namespace deflou\components\applications\anchors;
 
 use deflou\interfaces\applications\anchors\IAnchor;
-use deflou\interfaces\applications\anchors\IAnchorRepository;
 use deflou\interfaces\applications\anchors\IHasAnchor;
-use extas\components\SystemContainer;
+use extas\interfaces\repositories\IRepository;
 
 /**
  * Trait THasAnchor
  *
  * @property $config
+ * @method IRepository deflouAnchorRepository()
  *
  * @package deflou\components\applications\anchors
  * @author jeyroik <jeyroik@gmail.com>
@@ -29,12 +29,7 @@ trait THasAnchor
      */
     public function getAnchor(): ?IAnchor
     {
-        /**
-         * @var $repo IAnchorRepository
-         */
-        $repo = SystemContainer::getItem(IAnchorRepository::class);
-
-        return $repo->one([IAnchor::FIELD__ID => $this->getAnchorId()]);
+        return $this->deflouAnchorRepository()->one([IAnchor::FIELD__ID => $this->getAnchorId()]);
     }
 
     /**

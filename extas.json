@@ -6,7 +6,15 @@
       "class": "deflou\\components\\applications\\activities\\ActivityRepository"
     },
     {
+      "interface": "activityRepository",
+      "class": "deflou\\components\\applications\\activities\\ActivityRepository"
+    },
+    {
       "interface": "deflou\\interfaces\\applications\\activities\\IActivitySampleRepository",
+      "class": "deflou\\components\\applications\\activities\\ActivitySampleRepository"
+    },
+    {
+      "interface": "activitySampleRepository",
       "class": "deflou\\components\\applications\\activities\\ActivitySampleRepository"
     },
     {
@@ -14,7 +22,15 @@
       "class": "deflou\\components\\applications\\anchors\\AnchorRepository"
     },
     {
+      "interface": "anchorRepository",
+      "class": "deflou\\components\\applications\\anchors\\AnchorRepository"
+    },
+    {
       "interface": "deflou\\interfaces\\applications\\IApplicationRepository",
+      "class": "deflou\\components\\applications\\ApplicationRepository"
+    },
+    {
+      "interface": "applicationRepository",
       "class": "deflou\\components\\applications\\ApplicationRepository"
     },
     {
@@ -22,23 +38,15 @@
       "class": "deflou\\components\\applications\\ApplicationSampleRepository"
     },
     {
-      "interface": "deflou\\interfaces\\fields\\types\\IFieldTypeRepository",
-      "class": "deflou\\components\\fields\\types\\FieldTypeRepository"
-    },
-    {
-      "interface": "deflou\\interfaces\\fields\\types\\IFieldTypeSampleRepository",
-      "class": "deflou\\components\\fields\\types\\FieldTypeSampleRepository"
-    },
-    {
-      "interface": "deflou\\interfaces\\fields\\IFieldRepository",
-      "class": "deflou\\components\\fields\\FieldRepository"
-    },
-    {
-      "interface": "deflou\\interfaces\\fields\\IFieldSampleRepository",
-      "class": "deflou\\components\\fields\\FieldSampleRepository"
+      "interface": "applicationSampleRepository",
+      "class": "deflou\\components\\applications\\ApplicationSampleRepository"
     },
     {
       "interface": "deflou\\interfaces\\triggers\\ITriggerRepository",
+      "class": "deflou\\components\\triggers\\TriggerRepository"
+    },
+    {
+      "interface": "triggerRepository",
       "class": "deflou\\components\\triggers\\TriggerRepository"
     },
     {
@@ -46,11 +54,23 @@
       "class": "deflou\\components\\triggers\\TriggerSampleRepository"
     },
     {
+      "interface": "triggerSampleRepository",
+      "class": "deflou\\components\\triggers\\TriggerSampleRepository"
+    },
+    {
       "interface": "deflou\\interfaces\\triggers\\ITriggerStateHistoryRepository",
       "class": "deflou\\components\\triggers\\TriggerStateHistoryRepository"
     },
     {
+      "interface": "triggerStateHistoryRepository",
+      "class": "deflou\\components\\triggers\\TriggerStateHistoryRepository"
+    },
+    {
       "interface": "deflou\\interfaces\\triggers\\ITriggerResponseRepository",
+      "class": "deflou\\components\\triggers\\TriggerResponseRepository"
+    },
+    {
+      "interface": "triggerResponseRepository",
       "class": "deflou\\components\\triggers\\TriggerResponseRepository"
     }
   ],
@@ -110,36 +130,6 @@
       "updated_at": "@timestamp(0)"
     }
   ],
-  "field_types": [
-    {
-      "name": "string20",
-      "class": "\\FieldString",
-      "parameters": {
-        "min_length": {
-          "name": "max_length",
-          "value": 0
-        },
-        "max_length": {
-          "name": "max_length",
-          "value": 20
-        }
-      }
-    }
-  ],
-  "field_type_samples": [
-    {
-      "name": "string",
-      "class": "\\FieldString",
-      "parameters": {
-        "min_length": {
-          "name": "max_length"
-        },
-        "max_length": {
-          "name": "max_length"
-        }
-      }
-    }
-  ],
   "plugins": [
     {
       "class": "extas\\components\\plugins\\repositories\\PluginFieldSampleName",
@@ -182,6 +172,31 @@
       "interface": "extas\\interfaces\\extensions\\IExtensionHasCondition",
       "methods": ["isConditionTrue", "getCondition", "getConditionName", "setConditionName"],
       "subject": "extas.sample.parameter"
+    },
+    {
+      "class": "extas\\components\\extensions\\ExtensionRepositoryGet",
+      "interface": "extas\\interfaces\\extensions\\IExtensionRepositoryGet",
+      "subject": "*",
+      "methods": [
+        "deflou\\interfaces\\applications\\activities\\IActivityRepository",
+        "activityRepository",
+        "deflou\\interfaces\\applications\\activities\\IActivitySampleRepository",
+        "activitySampleRepository",
+        "deflou\\interfaces\\applications\\anchors\\IAnchorRepository",
+        "anchorRepository",
+        "deflou\\interfaces\\applications\\IApplicationRepository",
+        "applicationRepository",
+        "deflou\\interfaces\\applications\\IApplicationSampleRepository",
+        "applicationSampleRepository",
+        "deflou\\interfaces\\triggers\\ITriggerRepository",
+        "triggerRepository",
+        "deflou\\interfaces\\triggers\\ITriggerSampleRepository",
+        "triggerSampleRepository",
+        "deflou\\interfaces\\triggers\\ITriggerStateHistoryRepository",
+        "triggerStateHistoryRepository",
+        "deflou\\interfaces\\triggers\\ITriggerResponseRepository",
+        "triggerResponseRepository"
+      ]
     }
   ]
 }

@@ -3,14 +3,14 @@ namespace deflou\components\triggers;
 
 use deflou\interfaces\triggers\IHasTrigger;
 use deflou\interfaces\triggers\ITrigger;
-use deflou\interfaces\triggers\ITriggerRepository;
-use extas\components\SystemContainer;
+use extas\interfaces\repositories\IRepository;
 
 /**
  * Trait THasTrigger
  * 
  * @property $config
- * 
+ * @method IRepository deflouTriggerRepository()
+ *
  * @package deflou\components\triggers
  * @author jeyroik@gmail.com
  */
@@ -29,12 +29,7 @@ trait THasTrigger
      */
     public function getTrigger(): ?ITrigger
     {
-        /**
-         * @var $repo ITriggerRepository
-         */
-        $repo = SystemContainer::getItem(ITriggerRepository::class);
-        
-        return $repo->one([ITrigger::FIELD__NAME => $this->getTriggerName()]);
+        return $this->deflouTriggerRepository()->one([ITrigger::FIELD__NAME => $this->getTriggerName()]);
     }
 
     /**

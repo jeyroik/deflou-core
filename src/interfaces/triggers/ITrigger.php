@@ -1,7 +1,7 @@
 <?php
 namespace deflou\interfaces\triggers;
 
-use deflou\interfaces\IHasState;
+use extas\interfaces\IHasState;
 
 /**
  * Interface ITrigger

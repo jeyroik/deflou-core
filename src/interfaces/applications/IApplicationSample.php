@@ -1,6 +1,7 @@
 <?php
 namespace deflou\interfaces\applications;
 
+use extas\interfaces\IHasTags;
 use extas\interfaces\players\IHasPlayer;
 use extas\interfaces\samples\ISample;
 
@@ -10,7 +11,7 @@ use extas\interfaces\samples\ISample;
  * @package deflou\interfaces\applications
  * @author jeyroik@gmail.com
  */
-interface IApplicationSample extends ISample, IHasPlayer
+interface IApplicationSample extends ISample, IHasPlayer, IHasTags
 {
 
 }
