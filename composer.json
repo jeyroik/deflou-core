@@ -3,7 +3,7 @@
   "description": "Core package for DeFlou",
   "require": {
     "jeyroik/extas-players": "1.*",
-    "jeyroik/extas-samples": "3.*",
+    "jeyroik/extas-foundation": "5.*",
     "jeyroik/extas-conditions": "0.*",
     "jeyroik/extas-repositories-mongo": "1.*",
     "jeyroik/extas-fields": "0.*",
