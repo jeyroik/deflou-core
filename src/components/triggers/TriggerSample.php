@@ -4,10 +4,12 @@ namespace deflou\components\triggers;
 use deflou\components\applications\activities\THasAction;
 use deflou\components\applications\activities\THasEvent;
 use deflou\interfaces\triggers\ITriggerSample;
+use extas\components\conditions\ConditionParameter;
 use extas\components\players\THasPlayer;
 use extas\components\samples\parameters\SampleParameter;
 use extas\components\samples\Sample;
 use extas\components\THasTags;
+use extas\interfaces\conditions\IConditionParameter;
 use extas\interfaces\samples\parameters\ISampleParameter;
 
 /**
@@ -35,7 +37,7 @@ class TriggerSample extends Sample implements ITriggerSample
     }
 
     /**
-     * @return ISampleParameter[]
+     * @return IConditionParameter[]
      */
     public function getEventParameters(): array
     {
@@ -43,7 +45,7 @@ class TriggerSample extends Sample implements ITriggerSample
         $parameters = [];
         
         foreach ($parametersOptions as $parameter) {
-            $parameters[] = new SampleParameter($parameter);
+            $parameters[] = new ConditionParameter($parameter);
         }
         
         return $parameters;

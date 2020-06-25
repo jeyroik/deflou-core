@@ -84,12 +84,7 @@
       "player_name": "admin",
       "type": "action",
       "class": "deflou\\components\\applications\\activities\\actions\\ActionNothing",
-      "parameters": {
-        "useless": {
-          "name": "useless",
-          "type": "string20"
-        }
-      },
+      "parameters": {},
       "created_at": "@timestamp(0)",
       "updated_at": "@timestamp(0)"
     }
