@@ -26,22 +26,14 @@ trait THasEvent
     }
 
     /**
-     * @param bool $required if event is required and missed, than an exception is thrown
      * @return IActivity|null
-     * @throws MissedOrUnknown
      */
-    public function getEvent(bool $required = false): ?IActivity
+    public function getEvent(): ?IActivity
     {
-        $event = $this->deflouActivityRepository()->one([
+        return $this->deflouActivityRepository()->one([
             IActivity::FIELD__NAME => $this->getEventName(),
             IActivity::FIELD__TYPE => IActivity::TYPE__EVENT
         ]);
-
-        if ($required and !$event) {
-            throw new MissedOrUnknown('event ' . $this->getEventName());
-        }
-
-        return $event;
     }
 
     /**
