@@ -138,7 +138,7 @@ class CoreTest extends TestCase
         $response->setActionApplicationName('test');
         $this->assertEquals('test', $response->getActionApplicationName());
 
-        $this->createWithSnuffRepo('deflouApplicationRepository', new Application([
+        $this->getMagicClass('applications')->create(new Application([
             Application::FIELD__NAME => 'test',
             Application::FIELD__SAMPLE_NAME => 'test'
         ]));
@@ -149,7 +149,7 @@ class CoreTest extends TestCase
         $response->setActionName('test');
         $this->assertEquals('test', $response->getActionName());
 
-        $this->createWithSnuffRepo('deflouActivityRepository', new Activity([
+        $this->getMagicClass('activities')->create(new Activity([
             Activity::FIELD__NAME => 'test',
             Activity::FIELD__TYPE => Activity::TYPE__ACTION,
             Activity::FIELD__APPLICATION_NAME => 'test'
@@ -167,7 +167,7 @@ class CoreTest extends TestCase
         $response->setActionSampleName('test');
         $this->assertEquals('test', $response->getActionSampleName());
 
-        $this->createWithSnuffRepo('deflouActivitySampleRepository', new ActivitySample([
+        $this->getMagicClass('activitiesSamples')->create(new ActivitySample([
             ActivitySample::FIELD__NAME => 'test'
         ]));
 
@@ -177,7 +177,7 @@ class CoreTest extends TestCase
         $response->setActionApplicationSampleName('test');
         $this->assertEquals('test', $response->getActionApplicationSampleName());
 
-        $this->createWithSnuffRepo('deflouApplicationSampleRepository', new ApplicationSample([
+        $this->getMagicClass('applicationsSamples')->create(new ApplicationSample([
             ApplicationSample::FIELD__NAME => 'test'
         ]));
 
@@ -195,7 +195,7 @@ class CoreTest extends TestCase
         $response->setEventName('test');
         $this->assertEquals('test', $response->getEventName());
 
-        $this->createWithSnuffRepo('deflouActivityRepository', new Activity([
+        $this->getMagicClass('activities')->create(new Activity([
             Activity::FIELD__NAME => 'test',
             Activity::FIELD__TYPE => Activity::TYPE__EVENT,
             Activity::FIELD__APPLICATION_NAME => 'test'
@@ -221,7 +221,7 @@ class CoreTest extends TestCase
         $response->setTriggerName('test');
         $this->assertEquals('test', $response->getTriggerName());
 
-        $this->createWithSnuffRepo('deflouTriggerRepository', new Trigger([
+        $this->getMagicClass('triggers')->create(new Trigger([
             Trigger::FIELD__NAME => 'test'
         ]));
 
