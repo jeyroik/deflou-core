@@ -16,10 +16,10 @@ use extas\interfaces\repositories\IRepository;
 /**
  * Class TriggerResponse
  *
- * @method IRepository deflouActivityRepository()
- * @method IRepository deflouApplicationRepository()
- * @method IRepository deflouActivitySampleRepository()
- * @method IRepository deflouApplicationSampleRepository()
+ * @method IRepository activities()
+ * @method IRepository applications()
+ * @method IRepository activitiesSamples()
+ * @method IRepository applicationsSamples()
  *
  * @package deflou\components\triggers
  * @author jeyroik@gmail.com
@@ -46,7 +46,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventSample(): ?IActivitySample
     {
-        return $this->deflouActivitySampleRepository()->one([
+        return $this->activitiesSamples()->one([
             IActivitySample::FIELD__NAME => $this->getEventSampleName()
         ]);
     }
@@ -64,7 +64,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventApplication(): ?IApplication
     {
-        return $this->deflouApplicationRepository()->one([
+        return $this->applications()->one([
             IApplication::FIELD__NAME => $this->getEventApplicationName()
         ]);
     }
@@ -82,7 +82,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getEventApplicationSample(): ?IApplicationSample
     {
-        return $this->deflouApplicationSampleRepository()->one([
+        return $this->applicationsSamples()->one([
             IApplicationSample::FIELD__NAME => $this->getEventApplicationSampleName()
         ]);
     }
@@ -133,7 +133,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionSample(): ?IActivitySample
     {
-        return $this->deflouActivitySampleRepository()->one([
+        return $this->activitiesSamples()->one([
             IApplicationSample::FIELD__NAME => $this->getActionSampleName()
         ]);
     }
@@ -151,7 +151,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionApplication(): ?IApplication
     {
-        return $this->deflouApplicationRepository()->one([
+        return $this->applications()->one([
             IApplication::FIELD__NAME => $this->getActionApplicationName()
         ]);
     }
@@ -169,7 +169,7 @@ class TriggerResponse extends Item implements ITriggerResponse
      */
     public function getActionApplicationSample(): ?IApplicationSample
     {
-        return $this->deflouApplicationSampleRepository()->one([
+        return $this->applicationsSamples()->one([
             IApplicationSample::FIELD__NAME => $this->getActionApplicationSampleName()
         ]);
     }

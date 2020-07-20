@@ -9,7 +9,7 @@ use extas\interfaces\repositories\IRepository;
  * Trait THasAction
  *
  * @property $config
- * @method IRepository deflouActivityRepository()
+ * @method IRepository activities()
  *
  * @package deflou\components\applications\activities
  * @author jeyroik@gmail.com
@@ -29,7 +29,7 @@ trait THasAction
      */
     public function getAction(): ?IActivity
     {
-        return $this->deflouActivityRepository()->one([
+        return $this->activities()->one([
             IActivity::FIELD__NAME => $this->getActionName(),
             IActivity::FIELD__TYPE => IActivity::TYPE__ACTION
         ]);
