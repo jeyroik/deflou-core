@@ -10,7 +10,7 @@ use extas\interfaces\repositories\IRepository;
  * Trait THasEvent
  * 
  * @property $config
- * @method IRepository deflouActivityRepository()
+ * @method IRepository activities()
  * 
  * @package deflou\components\applications\activities
  * @author jeyroik@gmail.com
@@ -30,7 +30,7 @@ trait THasEvent
      */
     public function getEvent(): ?IActivity
     {
-        return $this->deflouActivityRepository()->one([
+        return $this->activities()->one([
             IActivity::FIELD__NAME => $this->getEventName(),
             IActivity::FIELD__TYPE => IActivity::TYPE__EVENT
         ]);

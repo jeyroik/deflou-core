@@ -18,7 +18,6 @@ class ActivitySample extends Sample implements IActivitySample
 {
     use THasPlayer;
     use THasType;
-    use THasClass;
     use THasFields;
 
     /**

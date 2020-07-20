@@ -9,7 +9,7 @@ use extas\interfaces\repositories\IRepository;
  * Trait THasApplication
  *
  * @property $config
- * @method IRepository deflouApplicationRepository()
+ * @method IRepository applications()
  *
  * @package deflou\components\applications
  * @author jeyroik <jeyroik@gmail.com>
@@ -29,7 +29,7 @@ trait THasApplication
      */
     public function getApplication(): ?IApplication
     {
-        return $this->deflouApplicationRepository()->one([IApplication::FIELD__NAME => $this->getApplicationName()]);
+        return $this->applications()->one([IApplication::FIELD__NAME => $this->getApplicationName()]);
     }
 
     /**

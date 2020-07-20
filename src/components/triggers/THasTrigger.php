@@ -9,7 +9,7 @@ use extas\interfaces\repositories\IRepository;
  * Trait THasTrigger
  * 
  * @property $config
- * @method IRepository deflouTriggerRepository()
+ * @method IRepository triggers()
  *
  * @package deflou\components\triggers
  * @author jeyroik@gmail.com
@@ -29,7 +29,7 @@ trait THasTrigger
      */
     public function getTrigger(): ?ITrigger
     {
-        return $this->deflouTriggerRepository()->one([ITrigger::FIELD__NAME => $this->getTriggerName()]);
+        return $this->triggers()->one([ITrigger::FIELD__NAME => $this->getTriggerName()]);
     }
 
     /**
